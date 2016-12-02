@@ -1,36 +1,39 @@
 module Registers
 (
     clk_i,
-    RSaddr_i,
-    RTaddr_i,
-    RDaddr_i, 
-    RDdata_i,
-    RegWrite_i, 
-    RSdata_o, 
-    RTdata_o 
+    rsaddr_i,
+    rtaddr_i,
+    rdaddr_i, 
+    rddata_i,
+    regwrite_i, 
+    rsdata1_o,
+	rsdata2_o,
+	rtdata1_o,
+    rtdata2_o 
+	
 );
 
 // Ports
 input               clk_i;
-input   [4:0]       RSaddr_i;
-input   [4:0]       RTaddr_i;
-input   [4:0]       RDaddr_i;
-input   [31:0]      RDdata_i;
-input               RegWrite_i;
-output  [31:0]      RSdata_o; 
-output  [31:0]      RTdata_o;
+input   [4:0]       rsaddr_i;
+input   [4:0]       rtaddr_i;
+input   [4:0]       rdaddr_i;
+input   [31:0]      rddata_i;
+input               regwrite_i;
+output  [31:0]      rsdata1_o, rsdata2_o; 
+output  [31:0]      rtdata1_o, rtdata2_o;
 
 // Register File
 reg     [31:0]      register        [0:31];
 
 // Read Data      
-assign  RSdata_o = register[RSaddr_i];
-assign  RTdata_o = register[RTaddr_i];
+assign  rsdata_o = register[rsaddr_i];
+assign  rtdata_o = register[rtaddr_i];
 
 // Write Data   
 always@(posedge clk_i) begin
-    if(RegWrite_i)
-        register[RDaddr_i] <= RDdata_i;
+    if(regwrite_i)
+        register[rdaddr_i] <= rddata_i;
 end
    
 endmodule 

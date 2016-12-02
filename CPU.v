@@ -14,7 +14,7 @@ wire 	[31:0] 	inst_addr, inst;
 
 
 Control Control(
-    .Op_i        (IF_ID.op_o), 					//6 bits from IF_ID
+    .op_i        (IF_ID.op_o), 					//6 bits from IF_ID
 	.mux1_o		 (MUX1.control_i), 				//1 bit Sends to mux1
 	.mux2_o		 (MUX2.control_i),				//1 bit Sends to mux2
 	.mux8_o		 (MUX8.control_i)  				//9 bits Sends to mux2
@@ -51,7 +51,7 @@ IF_ID IF_ID(
 	.flush_i     (Flush.data_o)					//1  bit, flush or not
 	.mux2_o 	 (MUX2.if_id_i), 				//26 bits, instruction[25:0] (needs to shift left)
 	.hd_o		 (HD.if_id_i),					//?? bits, to hazard detection
-	.op_o	 	 (Control.Op_i),				//6  bits, op to control_i
+	.op_o	 	 (Control.op_i),				//6  bits, op to control_i
 	.inst_addr1_o(Add_Branch.data2_i),			//32 bits, instruction address
 	.inst_addr2_o(ID_EX.inst_addr_i),			//32 bits, instruction address
 	.rs1_o		 (Registers.rsaddr_i),			//5  bits, rs address
@@ -77,7 +77,7 @@ Registers Registers(
 
 HD HD(
 	.if_id_i 	 (IF_ID.hd_o),					//?? bits, something
-	.id_ex_i	 (ID_EX.rdaddr_o),				//5  bits, rd address
+	.id_ex_i	 (ID_EX.rtaddr3_o),				//5  bits, rd address
 	.id_ex_mem_i (ID_EX.mem_o),					//3  bits, mem control signal
 	.mux8_o		 (MUX8.hd_i),					//1  bit, hazard or no hazard
 	.pc_o		 (PC.hd_i),						//1  bit, hazard or no hazard
@@ -94,9 +94,9 @@ MUX8 MUX8(
 	.data1_i 	 (Control.mux8_o),				//9  bits, control stuff
 	.data2_i	 (9'd0),						//9  bits, all zero
 	.hd_i 		 (HD.mux8_o),					//1  bit, hazard or no hazard
-	.id_ex_wb_o	 (ID_EX.wb_i),					//2  bits, control input
-	.id_ex_mem_o (ID_EX.mem_i),					//3  bits, control input
-	.id_ex_ex_o  (ID_EX.ex_i)					//4  bits, control input
+	.wb_o	     (ID_EX.wb_i),					//2  bits, control input
+	.mem_o       (ID_EX.mem_i),					//3  bits, control input
+	.ex_o  		 (ID_EX.ex_i)					//4  bits, control input
 );
 
 Equal Equal(
@@ -107,8 +107,44 @@ Equal Equal(
 );
 
 Sign_Extend Sign_Extend(
-    .data_i     (inst[15:0]),
-    .data_o     (MUX_ALUSrc.data2_i)
+    .if_id_i     (IF_ID.sign16_o),			    //16 bits, imm. input
+    .id_ex_o     (ID_EX.sign_extd_i),			//32 bits, imm. output
+	.b_add_o     (Add_Branch.data1_i)			//32 bits, imm. output
+);
+
+ID_EX ID_EX(
+	.wb_i	 	 (MUX8.wb_o),					//2  bits, control input
+	.mem_i	     (MUX8.mem_o),					//3  bits, control input
+	.ex_i		 (MUX8.ex_o),					//4  bits, control input
+	.inst_addr_i (IF_ID.inst_addr2_o),			//32 bits, instruction address
+	.rsdata_i 	 (Registers.rsdata1_o),			//32 bits, rs data
+	.rtdata_i	 (Registers.rtdata1_o),			//32 bits, rt data
+	.imm_i 		 (Sign_Extend.id_ex_o),			//32 bits, imm. input
+	.rsaddr_i	 (IF_ID.rs2_o),					//5  bits, rs address
+	.rtaddr_i 	 (IF_ID.rt2_o),					//5  bits, rt address
+	.rdaddr_i 	 (IF_ID.rd_o),					//5  bits, rd address
+	.wb_o		 (EX_MEM.wb_i),					//2  bits, control input
+	.mem_o		 (EX_MEM.mem_i),				//3  bits, control input
+	.ex1_o		 (MUX4.alusrc_i),				//1  bit, control input
+	.ex2_o		 (ALU_Control.aluop_i),			//2  bit, control input	
+	.ex3_o		 (MUX3.regdst_i),				//1  bit, control input
+	.rsdata_o 	 (MUX6.data1_i),				//32 bits, rs data
+	.rtdata_o	 (MUX7.data1_i),				//32 bits, rt data
+	.imm_o		 (MUX4.data2_i),				//32 bits, imm. output
+	.rsaddr_o	 (FU.rsaddr_i),					//5  bits, rs address
+	.rtaddr1_o	 (FU.rtaddr_i),					//5  bits, rt address
+	.rtaddr2_o	 (MUX3.data1_i),				//5  bits, rt address
+	.rtaddr3_o   (HD.id_ex_i),					//5  bits, rt address
+	.rdaddr_o	 (MUX3.data2_i)					//5  bits, rd address
+);
+
+MUX6 MUX6(
+	.data1_i	 (ID_EX.rsdata_o),				//32 bits, rs data
+	.data2_i	 (MUX5.data_o),					//32 bits, forwarded data
+	.data3_i     (EX_MEM.result_out),			//32 bits, ALU result
+	.fu_i		 (FU.mux6_o),					//1  bit, FU input
+	.data_o		 (ALU.data1_i)					//32 bits, 
+
 );
 
 MUX5 MUX_RegDst(
@@ -142,7 +178,7 @@ ALU ALU(
     .data1_i    (Registers.RSdata_o),
     .data2_i    (MUX_ALUSrc.data_o),
     .ALUCtrl_i  (ALU_Control.ALUCtrl_o),
-    .data_o     (Registers.RDdata_i),
+    .result_o     (Registers.RDdata_i),
     .Zero_o     (dummy)
 );
 
