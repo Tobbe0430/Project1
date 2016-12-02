@@ -1,7 +1,7 @@
 module Registers
 (
     clk_i,
-    RSaddr_i,
+    rsaddr_i,
     RTaddr_i,
     RDaddr_i, 
     RDdata_i,
