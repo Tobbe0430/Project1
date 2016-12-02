@@ -23,13 +23,16 @@ reg     [31:0]      pc_o;
 
 always@(posedge clk_i or negedge rst_i) begin
     if(~rst_i) begin
-        pc_o <= 32'b0;
+        pc1_o <= 32'b0;
+		pc2_o <= 32'b0;
     end
     else begin
         if(start_i)
-            pc_o <= pc_i;
+            pc1_o <= pc_i;
+			pc2_o <= pc_i;
         else
-            pc_o <= pc_o;
+            pc1_o <= pc1_o;
+			pc2_o <= pc2_o;
     end
 end
 
