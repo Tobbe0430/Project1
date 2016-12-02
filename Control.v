@@ -32,6 +32,16 @@ begin
 		endcase
 		
 		//TODO Add more here!
+		//mux8_0[0] = 
+		//mux8_0[1] =
+		//mux8_0[2] =
+		//mux8_0[3] =
+		//mux8_0[4] =
+		//mux8_0[5] = Memread ()
+		//mux8_0[6] = Memwrite (If are going to write into memory or not)
+		//mux8_0[7] = Regwrite (If we are going to write into the register or not)
+		//mux8_0[8] = Memreg (If we should save the value from Alu or the memory in the register)
+		
 		
 end
 // assign RegDst_o = (Op_i == 6'b000000)? (1'b1):
