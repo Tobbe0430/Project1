@@ -130,7 +130,8 @@ ID_EX ID_EX(
 	.ex3_o		 (MUX3.regdst_i),				//1  bit, control input
 	.rsdata_o 	 (MUX6.data1_i),				//32 bits, rs data
 	.rtdata_o	 (MUX7.data1_i),				//32 bits, rt data
-	.imm_o		 (MUX4.data2_i),				//32 bits, imm. output
+	.imm1_o		 (MUX4.data2_i),				//32 bits, imm. output
+	.funct_o	 (ALU_Control.funct_i)			//6  bits, 6 LSB of imm. output
 	.rsaddr_o	 (FU.rsaddr_i),					//5  bits, rs address
 	.rtaddr1_o	 (FU.rtaddr_i),					//5  bits, rt address
 	.rtaddr2_o	 (MUX3.data1_i),				//5  bits, rt address
@@ -140,15 +141,81 @@ ID_EX ID_EX(
 
 MUX6 MUX6(
 	.data1_i	 (ID_EX.rsdata_o),				//32 bits, rs data
-	.data2_i	 (MUX5.data_o),					//32 bits, forwarded data
-	.data3_i     (EX_MEM.result_out),			//32 bits, ALU result
+	.data2_i	 (MUX5.data1_o),				//32 bits, forwarded data
+	.data3_i     (EX_MEM.result4_o),			//32 bits, ALU result
 	.fu_i		 (FU.mux6_o),					//1  bit, FU input
-	.data_o		 (ALU.data1_i)					//32 bits, 
+	.data_o		 (ALU.data1_i)					//32 bits, ALU data 1
+);
+
+MUX7 MUX7(
+	.data1_i	 (ID_EX.rtdata_o),				//32 bits, rt data
+	.data2_i	 (MUX5.data2_o),				//32 bits, forwarded data
+	.data3_i	 (EX_MEM.result3_o),			//32 bits, forwarded data
+	.fu_i		 (FU.mux7_o),					//1  bit, FU input
+	.data1_o	 (MUX4.data1_i),				//32 bits, for mux4 data1
+	.data2_o	 (EX_MEM.rtdata_i)				//32 bits, for mem.write
+);
+
+MUX4 MUX4(
+	.data1_i	 (MUX7.data1_o),				//32 bits, register input
+	.data2_i 	 (ID_EX.imm_o),					//32 bits, imm. input
+	.alusrc_i    (ID_EX.ex1_o),					//1  bit, control input
+	.data_o		 (ALU.data2_i)					//32 bits, ALU data 2
+);
+
+ALU ALU(
+	.data1_i	 (MUX6.data_o),					//32 bits, register input
+	.data2_i	 (MUX4.data_o),					//32 bits, register input
+	.aluctrl_i 	 (ALU_Control.aluctrl_o),		//3  bits, control input
+	.result_o	 (EX_MEM.result_i)				//32 bits, result output
+);
+
+ALU_Control ALU_Control(
+	.funct_i	 (ID_EX.funct_o),				//6  bits, control (function) input
+	.aluop_i	 (ID_EX.ex2_o),					//2  bits, control input
+	.aluctrl_o	 (ALU.aluctrl_i)				//3  bits, control input
+);
+
+MUX3 MUX3(
+	.regdst_i	 (ID_EX.ex3_o),					//1  bits, control input
+	.data1_i	 (ID_EX.rtaddr2_o),				//5  bits, rt address
+	.data2_i	 (ID_EX.rdaddr_o),				//5  bits, rd address
+	.data_o 	 (EX_MEM.rdaddr_i)				//5  bits, rd address
 
 );
 
+FU FU(
+	.rsaddr_i	 (ID_EX.rsaddr_o),				//5  bits, rs address
+	.rtaddr_i	 (ID_EX.rtaddr1_o),				//5  bits, rt address
+	.rdaddr1_i	 (EX_MEM.rdaddr1_o),			//5  bits, rd address from EX/MEM
+	.rdaddr2_i   (MEM_WB.rdaddr_o),				//5  bits, rd address from MEM/WB
+	.wb1_i		 (EX_MEM.wb1_o),				//2  bits, control input from EX/MEM
+	.wb2_i		 (MEM_WB.wb2_o),				//1  bits, control input from MEM/WB
+	.mux6_o		 (MUX6.fu_i),					//2  bits, control input
+	.mux7_o		 (MUX7.fu_i)					//2  bits, control input
+);
+
+EX_MEM EX_MEM(
+	.wb_i		 (ID_EX.wb_o),					//2  bits, control input
+	.mem_i		 (ID_EX.mem_o),					//3  bits, control input
+	.result_i	 (ALU.result_o),				//32 bits, ALU result
+	.rtdata_i    (MUX7.data2_o),				//32 bits, rt data for mem.write
+	.rdaddr_i	 (MUX3.data_o),					//5  bits, rd address
+	.wb1_o		 (FU.wb1_i),					//2  bits, control input
+	.wb2_o		 (MEM_WB.wb_i),					//2  bits, control input
+	.mem1_o		 (Data_Memory.memread_i),		//1  bit, control input
+	.mem2_o		 (Data_Memory.memwrite_i),		//1  bit, control input
+	.result1_o	 (Data_Memory.writeaddr_i),     //32 bits, write address
+	.result2_o	 (MEM_WB.aluresult_i),			//32 bits, 
+	.result3_o	 (MUX7.data3_i),
+	.result4_o   (MUX6.data3_i),
+	.rtdata_o
+	.rdaddr1_o
+	.rdaddr2_o
+);
+
 MUX5 MUX_RegDst(
-    .data1_i    (inst[20:16]),
+    .data1_i    (inst[20:16]),				
     .data2_i    (inst[15:11]),
     .select_i   (Control.regdst_o),
     .data_o     (Registers.rdaddr_i)
