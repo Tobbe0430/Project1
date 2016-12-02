@@ -141,9 +141,9 @@ ID_EX ID_EX(
 MUX6 MUX6(
 	.data1_i	 (ID_EX.rsdata_o),				//32 bits, rs data
 	.data2_i	 (MUX5.data_o),					//32 bits, forwarded data
-	.data3_i     (EX_MEM.result_out),			//
-	.fu_i		 (FU.mux6_o),
-	.data_o		 (ALU.data1_i)
+	.data3_i     (EX_MEM.result_out),			//32 bits, ALU result
+	.fu_i		 (FU.mux6_o),					//1  bit, FU input
+	.data_o		 (ALU.data1_i)					//32 bits, 
 
 );
 
