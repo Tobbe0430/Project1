@@ -10,6 +10,7 @@ input [31:0]	data2_i;
 	
 output [31:0]	data_o;
 
-Assign data_o = data1_i + data2_i;
+assign data1_i = data1_i << 2;
+assign data_o = data1_i + data2_i;
 
 endmodule 

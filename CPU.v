@@ -56,7 +56,7 @@ PC PC(
     .clk_i       (clk_i),
     .rst_i       (rst_i),
     .start_i     (start_i),
-	.hd_i		 (HD.pc_o),						//1 bit
+	.hd_i		 (HD.pc_o),						//1  bit
     .pc_i        (MUX2.data_o), 				//32 bits, instr. addr. from MUX2
     .pc1_o       (Add_PC.data1_i), 				//32 bits, instruction address
 	.pc2_o		 (Instruction_Memory.addr_i) 	//32 bits, instruction address
