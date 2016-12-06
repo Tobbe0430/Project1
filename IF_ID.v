@@ -1,5 +1,6 @@
 module IF_ID 	
 (
+	clk_i,
 	inst_addr_i,
 	inst_i,
 	hd_i,
@@ -17,6 +18,7 @@ module IF_ID
 	rd_o
 );
 
+input			clk_i;
 input	[31:0]	inst_addr_i,inst_i;
 input			hd_i,flush_i;
 output	[25:0]	mux2_o;
@@ -38,6 +40,15 @@ assign rt2_o = inst_i[20:16];
 assign sign16_o = inst_i[15:0];
 assign rd_o = inst_i[15:11];
 
+reg 	[31:0] 	inst_addr;
+reg 	[31:0]  inst;
+
 WHAT ABOUT FLUSH THOUGH??????
+
+always@(posedge clk_i) begin
+    if(NO FLUSH MAYBE?)
+        inst_addr <= inst_addr_i;
+		inst <= inst_i;
+end
 
 endmodule 
