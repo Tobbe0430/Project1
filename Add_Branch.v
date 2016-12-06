@@ -4,7 +4,7 @@ module Add_Branch
 	.data2_i,	 		//32 bits, inst addr
 	.data_o
 );
-//me carl a little dumb
+
 input [31:0]	data1_i;
 input [31:0]	data2_i; 
 	

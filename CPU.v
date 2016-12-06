@@ -68,6 +68,7 @@ Instruction_Memory Instruction_Memory(
 );
 
 IF_ID IF_ID(
+	.clk_i		 (clk_i),
 	.inst_addr_i (Add_PC.data2_o),				//32 bits, instruction address
 	.inst_i		 (Instruction_Memory.inst_o),	//32 bits, the whole instruction
 	.hd_i		 (HD.if_id_o),					//1  bit, hazard or no hazard? that is the question.
@@ -136,6 +137,7 @@ Sign_Extend Sign_Extend(
 );
 
 ID_EX ID_EX(
+	.clk_i		 (clk_i),
 	.wb_i	 	 (MUX8.wb_o),					//2  bits, control input
 	.mem_i	     (MUX8.mem_o),					//3  bits, control input
 	.ex_i		 (MUX8.ex_o),					//4  bits, control input
@@ -219,6 +221,7 @@ FU FU(
 );
 
 EX_MEM EX_MEM(
+	.clk_i		 (clk_i),
 	.wb_i		 (ID_EX.wb_o),					//2  bits, control input
 	.mem_i		 (ID_EX.mem_o),					//3  bits, control input
 	.result_i	 (ALU.result_o),				//32 bits, ALU result
@@ -246,6 +249,7 @@ Data_Memory Data_Memory(
 );
 
 MEM_WB MEM_WB(
+	.clk_i		 (clk_i),
 	.wb_i		 (EX_MEM.wb2_o),				//2  bits, control input
 	.memdata_i   (Data_Memory.memdata_o),		//32 bits, rt data read from memory
 	.aluresult_i (EX_MEM.result2_o),			//32 bits, ALU result
