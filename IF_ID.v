@@ -1,5 +1,6 @@
 module IF_ID 	
 (
+	clk_i,
 	inst_addr_i,
 	inst_i,
 	hd_i,
@@ -17,6 +18,7 @@ module IF_ID
 	rd_o
 );
 
+input 			clk_i;
 input	[31:0]	inst_addr_i,inst_i;
 input			hd_i,flush_i;
 output	[25:0]	mux2_o;
