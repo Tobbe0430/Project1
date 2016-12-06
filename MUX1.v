@@ -13,5 +13,8 @@ input	[31:0]	data1_i,data2_i;
 output	[31:0]	data_o;
 output			andresult_o;
 
+assign andresult_o = and1_i & and2_i;
+assign data_o = (andresult_i == 0)? (data1_i):
+				data2_i;
 
 endmodule
