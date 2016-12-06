@@ -102,7 +102,7 @@ Registers Registers(
 HD HD(
 	.if_id_i 	 (IF_ID.hd_o),					//?? bits, something
 	.id_ex_i	 (ID_EX.rtaddr3_o),				//5  bits, rd address
-	.id_ex_mem_i (ID_EX.mem_o),					//3  bits, mem control signal
+	.id_ex_mem_i (ID_EX.mem2_o),				//3  bits, mem control signal
 	.mux8_o		 (MUX8.hd_i),					//1  bit, hazard or no hazard
 	.pc_o		 (PC.hd_i),						//1  bit, hazard or no hazard
 	.if_id_o 	 (IF_ID.hd_i)					//1  bit, hazard or no hazard
@@ -149,7 +149,8 @@ ID_EX ID_EX(
 	.rtaddr_i 	 (IF_ID.rt2_o),					//5  bits, rt address
 	.rdaddr_i 	 (IF_ID.rd_o),					//5  bits, rd address
 	.wb_o		 (EX_MEM.wb_i),					//2  bits, control input
-	.mem_o		 (EX_MEM.mem_i),				//3  bits, control input
+	.mem1_o		 (EX_MEM.mem_i),				//3  bits, control input
+	.mem2_o		 (HD.id_ex_mem_i)
 	.ex1_o		 (MUX4.alusrc_i),				//1  bit, control input
 	.ex2_o		 (ALU_Control.aluop_i),			//2  bit, control input	
 	.ex3_o		 (MUX3.regdst_i),				//1  bit, control input
@@ -223,7 +224,7 @@ FU FU(
 EX_MEM EX_MEM(
 	.clk_i		 (clk_i),
 	.wb_i		 (ID_EX.wb_o),					//2  bits, control input
-	.mem_i		 (ID_EX.mem_o),					//3  bits, control input
+	.mem_i		 (ID_EX.mem1_o),				//3  bits, control input
 	.result_i	 (ALU.result_o),				//32 bits, ALU result
 	.rtdata_i    (MUX7.data2_o),				//32 bits, rt data for mem.write
 	.writeaddr_i (MUX3.data_o),					//5  bits, write address

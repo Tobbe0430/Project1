@@ -39,4 +39,7 @@ output	[1:0]	ex2_o;
 output	[31:0]	rsdata_o, rtdata_o, imm_o;
 output	[4:0]	rsaddr_o, rtaddr1_o, rtaddr2_o, rtaddr3_o, rdaddr_o;
 
+reg [1:0]
+reg []
+
 endmodule
