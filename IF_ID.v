@@ -28,17 +28,17 @@ output	[31:0]	inst_addr1_o,inst_addr2_o;
 output	[4:0]	rs1_o,rt1_o, rs2_o, rt2_o, rd_o;
 output	[15:0]	sign16_o;
 
-assign mux2_o = inst_i[25:0];
+assign mux2_o = inst[25:0];
 assign hd_o = ??
-assign op_o = inst_i[5:0];
-assign inst_addr1_o = inst_addr_i;
-assign inst_addr2_o = inst_addr_i;
-assign rs1_o = inst_i[25:21];
-assign rs2_o = inst_i[25:21];
-assign rt1_o = inst_i[20:16];
-assign rt2_o = inst_i[20:16];
-assign sign16_o = inst_i[15:0];
-assign rd_o = inst_i[15:11];
+assign op_o = inst[5:0];
+assign inst_addr1_o = inst_addr;
+assign inst_addr2_o = inst_addr;
+assign rs1_o = inst[25:21];
+assign rs2_o = inst[25:21];
+assign rt1_o = inst[20:16];
+assign rt2_o = inst[20:16];
+assign sign16_o = inst[15:0];
+assign rd_o = inst[15:11];
 
 reg [31:0] inst_addr;
 reg [31:0] inst;
