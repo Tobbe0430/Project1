@@ -15,3 +15,27 @@ input			hd_i;
 output	[1:0]	wb_o;
 output	[2:0]	mem_o;
 output	[3:0]	ex_o;
+
+reg [1:0]	temp_wb_o;
+reg [2:0]	temp_mem_o;
+reg [3:0]	temp_ex_o;
+
+assign wb_o = temp_wb_o;
+assign mem_o = temp_mem_o;
+assign ex_o = temp_ex_o;
+
+always @ (*)
+begin
+		case (hd_i)			
+			1'b0:	temp_wb_o	= data1_i[8:7];
+					temp_mem_o	= data1_i[6:4];
+					temp_ex_o	= data1_i[3:0];
+					
+			1'b1:	temp_wb_o	= data2_i[8:7];
+					temp_mem_o	= data2_i[6:4];
+					temp_ex_o	= data2_i[3:0];
+			default:
+endcase
+end
+
+endmodule

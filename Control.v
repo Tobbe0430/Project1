@@ -110,7 +110,8 @@ begin
 						temp_mux8_o[6]   = 1'b0;	//Memwrite	(If are going to write into memory or not)
 						//WB:
 						temp_mux8_o[7]   = 1'b0;	//Regwrite	(If we are going to write into the register or not)
-						//temp_mux8_o[8]   = 1'b1;	//Memreg	Don't care (If we should save the value from Alu or the memory in the register)			
+						//temp_mux8_o[8]   = 1'b1;	//Memreg	Don't care (If we should save the value from Alu or the memory in the register)		
+			default:	
 		endcase
 				
 		//TODO Add more here! 
