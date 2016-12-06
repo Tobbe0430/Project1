@@ -12,19 +12,42 @@ input               start_i;
 
 wire 	[31:0] 	inst_addr, inst;
 
+Flush Flush(
+	.jump_i		 (Control.flush_o),				//1 bit, is jump control input = 1?
+	.branch_i	 (MUX1.andresult_o),			//1 bit, were rtdata = rsdata and branch control input = 1?
+	.flush_o	 (IF_ID.flush_i)				//1 bit, are any of the above true? go flush
+);
+
+MUX1 MUX1(
+	.and1_i		 (Control.mux1_o),				//1  bit, needs to be and:ed with output from Equal
+	.and2_i		 (Equal.zero_o),				//1  bit, needs to be and:ed with control input (Equal.zero_o = 1 if rsdata = rtdata)
+	.data1_i	 (Add_Branch.data_o),			//32 bits, branch address
+	.data2_i	 (Add_PC.data1_o),				//32 bits, PC+4
+	.data_o		 (MUX2.data1_i),				//32 bits, PC+4 or branch address
+	.andresult_o (Flush.branch_i)				//1  bit, flush or not
+);
+
+MUX2 MUX2(
+	.data1_i	 (MUX1.data_o),					//32 bits, PC+4 or branch address
+	.data2_i	 (IF_ID.mux2_o),				//32 bits, jump address: instruction[25:0] (shifted left 2) (->28 bits) and 4 MSB from MUX1.data_o (->32 bits)
+	.control_i	 (Control.mux2_o),				//1  bit, control input
+	.data_o		 (PC.pc_i)						//32 bits, next PC
+);
+
 
 Control Control(
-    .op_i        (IF_ID.op_o), 					//6 bits from IF_ID
-	.mux1_o		 (MUX1.control_i), 				//1 bit Sends to mux1
-	.mux2_o		 (MUX2.control_i),				//1 bit Sends to mux2
-	.mux8_o		 (MUX8.control_i)  				//9 bits Sends to mux2
+    .op_i        (IF_ID.op_o), 					//6 bits, op code
+	.mux1_o		 (MUX1.control_i), 				//1 bit, control input
+	.mux2_o		 (MUX2.control_i),				//1 bit, control input
+	.flush_o	 (Flush.control_i)				//1 bit, flush or not
+	.mux8_o		 (MUX8.control_i),  			//9 bits, control input
 );
 
 
 Adder Add_PC(
     .data1_i   	 (PC.pc1_o), 					//32 bits from PC
     .data2_i   	 (32'd4), 						//32 bits, +4
-    .data1_o     (MUX1.data1_i), 				//32 bits, next PC address
+    .data1_o     (MUX1.data2_i), 				//32 bits, next PC address
 	.data2_o	 (IF_ID.inst_addr_i) 			//32 bits, next PC address
 );
 
@@ -48,8 +71,8 @@ IF_ID IF_ID(
 	.inst_addr_i (Add_PC.data2_o),				//32 bits, instruction address
 	.inst_i		 (Instruction_Memory.inst_o),	//32 bits, the whole instruction
 	.hd_i		 (HD.if_id_o),					//1  bit, hazard or no hazard? that is the question.
-	.flush_i     (Flush.data_o)					//1  bit, flush or not
-	.mux2_o 	 (MUX2.if_id_i), 				//26 bits, instruction[25:0] (needs to shift left)
+	.flush_i     (Flush.flush_o)			 	//1  bit, flush or not
+	.mux2_o 	 (MUX2.data2_i), 				//26 bits, instruction[25:0] (needs to shift left)
 	.hd_o		 (HD.if_id_i),					//?? bits, to hazard detection
 	.op_o	 	 (Control.op_i),				//6  bits, op to control_i
 	.inst_addr1_o(Add_Branch.data2_i),			//32 bits, instruction address
@@ -102,7 +125,7 @@ MUX8 MUX8(
 Equal Equal(
 	.rsdata_i 	 (Registers.rsdata2_o),			//32 bits, rs data
 	.rtdata_i    (Registers.rtdata2_o),			//32 bits, rt data
-	.zero_o		 (MUX1.data2_i)					//1  bit, is it zero or not
+	.zero_o		 (MUX1.and2_i)					//1  bit, is it zero or not
 
 );
 
@@ -143,7 +166,7 @@ MUX6 MUX6(
 	.data1_i	 (ID_EX.rsdata_o),				//32 bits, rs data
 	.data2_i	 (MUX5.data1_o),				//32 bits, forwarded data
 	.data3_i     (EX_MEM.result4_o),			//32 bits, ALU result
-	.fu_i		 (FU.mux6_o),					//1  bit, FU input
+	.fu_i		 (FU.mux6_o),					//2  bit, FU input
 	.data_o		 (ALU.data1_i)					//32 bits, ALU data 1
 );
 
@@ -151,7 +174,7 @@ MUX7 MUX7(
 	.data1_i	 (ID_EX.rtdata_o),				//32 bits, rt data
 	.data2_i	 (MUX5.data2_o),				//32 bits, forwarded data
 	.data3_i	 (EX_MEM.result3_o),			//32 bits, forwarded data
-	.fu_i		 (FU.mux7_o),					//1  bit, FU input
+	.fu_i		 (FU.mux7_o),					//2  bit, FU input
 	.data1_o	 (MUX4.data1_i),				//32 bits, for mux4 data1
 	.data2_o	 (EX_MEM.rtdata_i)				//32 bits, for mem.write
 );
