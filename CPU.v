@@ -15,7 +15,7 @@ wire 	[31:0] 	inst_addr, inst;
 Flush Flush(
 	.jump_i		 (Control.flush_o),				//1 bit, is jump control input = 1?
 	.branch_i	 (MUX1.andresult_o),			//1 bit, were rtdata = rsdata and branch control input = 1?
-	.flush_o	 (IF_ID.flush_i)				//1 bit, are any of the above true? go flush
+	.flush_o	 (IF_ID.flush_i)				//1 bit, is any of the above true? go flush
 );
 
 MUX1 MUX1(
@@ -40,7 +40,7 @@ Control Control(
 	.mux1_o		 (MUX1.control_i), 				//1 bit, control input
 	.mux2_o		 (MUX2.control_i),				//1 bit, control input
 	.flush_o	 (Flush.control_i)				//1 bit, flush or not
-	.mux8_o		 (MUX8.control_i),  			//9 bits, control input
+	.mux8_o		 (MUX8.control_i),  			//8 bits, control input
 );
 
 
@@ -102,7 +102,7 @@ Registers Registers(
 HD HD(
 	.if_id_i 	 (IF_ID.hd_o),					//?? bits, something
 	.id_ex_i	 (ID_EX.rtaddr3_o),				//5  bits, rd address
-	.id_ex_mem_i (ID_EX.mem2_o),				//3  bits, mem control signal
+	.id_ex_mem_i (ID_EX.mem2_o),				//2  bits, mem control signal
 	.mux8_o		 (MUX8.hd_i),					//1  bit, hazard or no hazard
 	.pc_o		 (PC.hd_i),						//1  bit, hazard or no hazard
 	.if_id_o 	 (IF_ID.hd_i)					//1  bit, hazard or no hazard
@@ -115,11 +115,11 @@ Add_Branch Add_Branch(
 );
 
 MUX8 MUX8(
-	.data1_i 	 (Control.mux8_o),				//9  bits, control stuff
-	.data2_i	 (9'd0),						//9  bits, all zero
+	.data1_i 	 (Control.mux8_o),				//8  bits, control stuff
+	.data2_i	 (8'd0),						//8  bits, all zero
 	.hd_i 		 (HD.mux8_o),					//1  bit, hazard or no hazard
 	.wb_o	     (ID_EX.wb_i),					//2  bits, control input
-	.mem_o       (ID_EX.mem_i),					//3  bits, control input
+	.mem_o       (ID_EX.mem_i),					//2  bits, control input
 	.ex_o  		 (ID_EX.ex_i)					//4  bits, control input
 );
 
@@ -139,7 +139,7 @@ Sign_Extend Sign_Extend(
 ID_EX ID_EX(
 	.clk_i		 (clk_i),
 	.wb_i	 	 (MUX8.wb_o),					//2  bits, control input
-	.mem_i	     (MUX8.mem_o),					//3  bits, control input
+	.mem_i	     (MUX8.mem_o),					//2  bits, control input
 	.ex_i		 (MUX8.ex_o),					//4  bits, control input
 	.inst_addr_i (IF_ID.inst_addr2_o),			//32 bits, instruction address
 	.rsdata_i 	 (Registers.rsdata1_o),			//32 bits, rs data
@@ -149,8 +149,8 @@ ID_EX ID_EX(
 	.rtaddr_i 	 (IF_ID.rt2_o),					//5  bits, rt address
 	.rdaddr_i 	 (IF_ID.rd_o),					//5  bits, rd address
 	.wb_o		 (EX_MEM.wb_i),					//2  bits, control input
-	.mem1_o		 (EX_MEM.mem_i),				//3  bits, control input
-	.mem2_o		 (HD.id_ex_mem_i)
+	.mem1_o		 (EX_MEM.mem_i),				//2  bits, control input
+	.mem2_o		 (HD.id_ex_mem_i),				//2  bits, control input
 	.ex1_o		 (MUX4.alusrc_i),				//1  bit, control input
 	.ex2_o		 (ALU_Control.aluop_i),			//2  bit, control input	
 	.ex3_o		 (MUX3.regdst_i),				//1  bit, control input
@@ -224,7 +224,7 @@ FU FU(
 EX_MEM EX_MEM(
 	.clk_i		 (clk_i),
 	.wb_i		 (ID_EX.wb_o),					//2  bits, control input
-	.mem_i		 (ID_EX.mem1_o),				//3  bits, control input
+	.mem_i		 (ID_EX.mem1_o),				//2  bits, control input
 	.result_i	 (ALU.result_o),				//32 bits, ALU result
 	.rtdata_i    (MUX7.data2_o),				//32 bits, rt data for mem.write
 	.writeaddr_i (MUX3.data_o),					//5  bits, write address
