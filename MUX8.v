@@ -15,3 +15,6 @@ input			hd_i;
 output	[1:0]	wb_o;
 output	[2:0]	mem_o;
 output	[3:0]	ex_o;
+
+
+endmodule 

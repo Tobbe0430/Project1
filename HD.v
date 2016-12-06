@@ -15,3 +15,5 @@ input [2:0] id_ex_mem_i;
 output 		mux8_o;
 output 		pc_o;
 output		if_id_o;
+
+endmodule
