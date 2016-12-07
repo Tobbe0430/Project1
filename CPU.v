@@ -38,8 +38,8 @@ Control Control(
     .op_i        	(IF_ID.op_o), 				//6 bits, op code
 	.mux1_o			(MUX1.control_i), 			//1 bit, control input
 	.mux2_o		 	(MUX2.control_i),			//1 bit, control input
-	.flush_o		(Flush.control_i)			//1 bit, flush or not
-	.mux8_o		 	(MUX8.control_i),  			//8 bits, control input
+	.flush_o		(Flush.control_i),			//1 bit, flush or not
+	.mux8_o		 	(MUX8.control_i)  			//8 bits, control input
 );
 
 Adder Add_PC(
@@ -81,7 +81,7 @@ IF_ID IF_ID(
 	.rs2_o			(ID_EX.rsaddr_i),			//5  bits, rs address
 	.rt2_o		 	(ID_EX.rtaddr_i), 			//5  bits, rt address
 	.sign16_o		(Sign_Extend.data_i),		//16 bits, immediate
-	.rd_o			(ID_EX.rdaddr_i),			//5  bits, rd address
+	.rd_o			(ID_EX.rdaddr_i)			//5  bits, rd address
 );
 
 Registers Registers(
@@ -94,7 +94,7 @@ Registers Registers(
     .rsdata1_o   	(ID_EX.rsdata_i),			//32 bits, rs data
 	.rsdata2_o	 	(Equal.rsdata_i),			//32 bits, rs data
 	.rtdata1_o		(ID_EX.rtdata_i),			//32 bits, rt data
-	.rtdata2_o   	(Equal.rtdata_i),			//32 bits, rt data
+	.rtdata2_o   	(Equal.rtdata_i)			//32 bits, rt data
 );
 
 HD HD(
