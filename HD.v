@@ -37,5 +37,6 @@ begin
 		temp_pc_o =		1'b1;
 		temp_mux8_o =	1'b0;
 		end
+end
 		
 endmodule
