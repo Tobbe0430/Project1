@@ -14,8 +14,8 @@ output	[31:0]	data1_o, data2_o;
 
 reg		temp_data1_o;
 reg		temp_data2_o_o;
-assign	data_o = temp_data1_o;
-assign	data_o = temp_data2_o;
+assign	data1_o = temp_data1_o;
+assign	data2_o = temp_data2_o;
 
 always @ (*)
 begin
