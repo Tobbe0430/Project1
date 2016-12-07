@@ -29,8 +29,7 @@ output	[31:0]	inst_addr1_o,inst_addr2_o;
 output	[4:0]	rs1_o,rt1_o, rs2_o, rt2_o, rd_o;
 output	[15:0]	sign16_o;
 
-reg [31:0] inst_addr;
-reg [31:0] inst;
+reg [31:0] inst_addr, inst;
 
 assign mux2_o = inst[25:0];
 assign op_o = inst[5:0];
@@ -46,13 +45,17 @@ assign sign16_o = inst[15:0];
 assign rd_o = inst[15:11];
 
 
-
-WHAT ABOUT FLUSH THOUGH??????
-
 always@(posedge clk_i) begin
-    if(NO FLUSH MAYBE?)
+    if(flush_i)
+		begin	
+		inst_addr = 0;
+		inst =		0;
+		end
+	else if(hd_i)
+		begin
         inst_addr <= inst_addr_i;
 		inst <= inst_i;
+		end
 end
 
 endmodule 
