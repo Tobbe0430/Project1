@@ -24,7 +24,7 @@ module ID_EX
 	rtaddr1_o,
 	rtaddr2_o,
 	rtaddr3_o,
-	raddr_o
+	rdaddr_o
 	//hi there
 );
 

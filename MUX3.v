@@ -1,4 +1,5 @@
-module MUX3(
+module MUX3
+(
 	regdist_i,
 	data1_i,
 	data2_i,

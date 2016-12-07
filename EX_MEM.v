@@ -21,7 +21,7 @@ module EX_MEM
 
 input			clk_i;
 input	[1:0]	wb_i;
-input	[2:0]	mem_i;
+input	[1:0]	mem_i;
 input	[31:0]	result_i, rtdata_i;
 input	[4:0]	writeaddr_i;
 output	[1:0]	wb1_o, wb2_o;
@@ -30,10 +30,11 @@ output	[31:0]	result1_o, result2_o, result3_o, result4_o, rtdata_o;
 output	[4:0]	writeaddr1_o, writeaddr2_o;
 
 reg 	[1:0]	wb;
-reg		[2:0]	mem;
+reg		[1:0]	mem;
 reg 	[31:0]	result, rtdata;
 reg		[4:0]	writeaddr;
 
+//FYI
 //eructar = to burp
 //eructo = one burp
 
