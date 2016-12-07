@@ -235,7 +235,7 @@ EX_MEM EX_MEM(
 	.result4_o   	(MUX6.data3_i),				//32 bits, ALU result from previous stage
 	.rtdata_o	 	(Data_Memory.writedata_i),	//32 bits, rt data for mem.write
 	.writeaddr1_o	(FU.writeaddr1_i),			//5  bits, write address
-	.rdaddr2_o	 	(MEM_WB.writeaddr_i)		//5  bits, write address
+	.writeaddr2_o 	(MEM_WB.writeaddr_i)		//5  bits, write address
 );
 
 Data_Memory Data_Memory(
@@ -251,6 +251,7 @@ MEM_WB MEM_WB(
 	.wb_i		 	(EX_MEM.wb2_o),				//2  bits, control input
 	.memdata_i   	(Data_Memory.memdata_o),	//32 bits, rt data read from memory
 	.aluresult_i 	(EX_MEM.result2_o),			//32 bits, ALU result
+	.writeaddr_i	(EX_MEM.writeaddr2_o),		//5  bits, the address where to write 
 	.wb1_o		 	(Registers.regwrite_i),		//1  bit, control input (regwrite)
 	.wb2_o		 	(FU.wb2_i),					//1  bit, control input (regwrite)
 	.wb3_o		 	(MUX5.memtoreg_i),			//1  bit, control input
