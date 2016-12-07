@@ -4,6 +4,7 @@ module MEM_WB
 	wb_i,
 	memdata_i,
 	aluresult_i,
+	writeaddr_i,
 	wb1_o,
 	wb2_o,
 	wb3_o,
@@ -19,5 +20,24 @@ input	[31:0]	memdata_i,aluresult_i;
 output			wb1_o, wb2_o, wb3_o;
 output	[31:0]	memdata_o, aluresult_o;
 output	[4:0]	writeaddr1_o, writeaddr2_o;
+
+assign wb1_o = wb[0];
+assign wb2_o = wb[0];
+assign wb3_o = wb[1];
+assign memdata_o = memdata;
+assign aluresult_o = aluresult;
+assign writeaddr1_o = writeaddr;
+assign writeaddr2_o = writeaddr;
+
+reg 	[1:0] wb;
+reg 	[31:0] memdata, aluresult;
+reg		[4:0] writeaddr;
+
+always@(posedge clk_i) begin
+        wb <= wb_i;
+		memdata <= memdata_i;
+		aluresult <= aluresult_i;
+		writeaddr <= writeaddr_i; 
+end
 
 endmodule 

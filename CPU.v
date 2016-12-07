@@ -243,7 +243,7 @@ EX_MEM EX_MEM(
 Data_Memory Data_Memory(
 	.memread_i 	 	(EX_MEM.mem1_o),			//1  bit, control input
 	.memwrite_i  	(EX_MEM.mem2_o),			//1  bit, control input
-	.writeaddr_i 	(EX_MEM.result1_o),			//1  bit, control input
+	.memaddr_i 	(EX_MEM.result1_o),			//1  bit, control input
 	.writedata_i 	(EX_MEM.rtdata_o),			//32 bits, rt data to be written into memory
 	.memdata_o 	 	(MEM_WB.memdata_i)			//32 bits, rt data read from memory
 );
@@ -253,7 +253,7 @@ MEM_WB MEM_WB(
 	.wb_i		 	(EX_MEM.wb2_o),				//2  bits, control input
 	.memdata_i   	(Data_Memory.memdata_o),	//32 bits, rt data read from memory
 	.aluresult_i 	(EX_MEM.result2_o),			//32 bits, ALU result
-	.writeaddr_i	(EX_MEM.writeaddr2_o),		//5  bits, the address where to write 
+	.writeaddr_i	(EX_MEM.writeaddr2_o),		//1 b
 	.wb1_o		 	(Registers.regwrite_i),		//1  bit, control input (regwrite)
 	.wb2_o		 	(FU.wb2_i),					//1  bit, control input (regwrite)
 	.wb3_o		 	(MUX5.memtoreg_i),			//1  bit, control input

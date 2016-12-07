@@ -1,12 +1,12 @@
 module Control
 (
-	Op_i,
+	op_i,
 	mux1_o,
 	mux2_o,
 	mux8_o
 );
 
-input 	[5:0] 	Op_i;
+input 	[5:0] 	op_i;
 output			mux1_o;
 output			mux2_o;
 output	[7:0]	mux8_o;
@@ -21,7 +21,7 @@ assign mux8_o = temp_max8_o;
 
 always @ (*)
 begin
-		case (Op_i)
+		case (op_i)
 			//R-Type
 			6'b000000:	temp_mux1_o		 = 1'b0;	//We are not going to branch
 						temp_mux2_o		 = 1'b0;	//We are not going to jump
@@ -83,7 +83,7 @@ begin
 						temp_mux2_o		 = 1'b0;	//We are not going to jump
 						//EX:
 						temp_mux8_o[0]   = 1'b0;	//ALUSrc 	(If we are going to use Immidiate or register in the ALU) 
-						temp_mux8_o[1:2] = 2'b01;	//ALUOp 	(What kind of operation the ALU should do)
+						//temp_mux8_o[1:2] = 2'b01;	//ALUOp 	(What kind of operation the ALU should do)
 						//temp_mux8_o[3]   = 1'b0;	//RegDst	Don't care (If we are going to store our result in rt or rd)
 						//M:
 						temp_mux8_o[4]   = 1'b0;	//Memread	(If we are going to read from memory or not)
@@ -97,7 +97,7 @@ begin
 						temp_mux2_o		 = 1'b1;	//If we are going to jump, send 1 to mux2
 						//EX:
 						//temp_mux8_o[0]   = 1'b0;	//ALUSrc 	Don't care (If we are going to use Immidiate or register in the ALU) 
-						temp_mux8_o[1:2] = 2'b01;	//ALUOp 	(What kind of operation the ALU should do)
+						//temp_mux8_o[1:2] = 2'b01;	//ALUOp 	(What kind of operation the ALU should do)
 						//temp_mux8_o[3]   = 1'b0;	//RegDst	Dont' care Don't care (If we are going to store our result in rt or rd)
 						//M:
 						temp_mux8_o[4]   = 1'b0;	//Memread	(If we are going to read from memory or not)

@@ -4,8 +4,8 @@ module MUX7
 	data2_i,
 	data3_i,
 	fu_i,
-	data1_o;
-	data2_o;
+	data1_o,
+	data2_o
 );
 
 input	[31:0]	data1_i, data2_i, data3_i;
