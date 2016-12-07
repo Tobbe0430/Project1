@@ -13,7 +13,7 @@ CPU CPU(
     .clk_i  (Clk),
     .start_i(Start)
 );
-  
+
 initial begin
     counter = 0;
     stall = 0;
