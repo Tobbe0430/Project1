@@ -101,7 +101,7 @@ HD HD(
 	.if_idrs_i 	 	(IF_ID.hdrs_o),				//5 bits, rsaddress
 	.if_idrt_i 	 	(IF_ID.hdrt_o),				//5 bits, rtaddress
 	.id_ex_i	 	(ID_EX.rtaddr3_o),			//5  bits, rd address
-	.id_ex_memread_i	(ID_EX.mem2_o),				//1  bits, mem control signal
+	.id_ex_memread_i	(ID_EX.mem2_o),			//1  bits, mem control signal
 	.mux8_o		 	(MUX8.hd_i),				//1  bit, hazard or no hazard
 	.pc_o		 	(PC.hd_i),					//1  bit, hazard or no hazard
 	.if_id_o 	 	(IF_ID.hd_i)				//1  bit, hazard or no hazard
