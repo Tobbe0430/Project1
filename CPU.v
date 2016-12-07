@@ -243,7 +243,7 @@ EX_MEM EX_MEM(
 Data_Memory Data_Memory(
 	.memread_i 	 	(EX_MEM.mem1_o),			//1  bit, control input
 	.memwrite_i  	(EX_MEM.mem2_o),			//1  bit, control input
-	.memaddr_i 	(EX_MEM.result1_o),			//1  bit, control input
+	.memaddr_i 		(EX_MEM.result1_o),			//1  bit, control input
 	.writedata_i 	(EX_MEM.rtdata_o),			//32 bits, rt data to be written into memory
 	.memdata_o 	 	(MEM_WB.memdata_i)			//32 bits, rt data read from memory
 );
