@@ -1,6 +1,5 @@
 module HD
 (
-<<<<<<< HEAD
 	.if_idrs_i,
 	.if_idrt_i,
 	.id_ex_i,
@@ -8,14 +7,6 @@ module HD
 	.mux8_o,		 
 	.pc_o,		
 	.if_id_o 	
-=======
-	if_id_i,
-	id_ex_i,
-	id_ex_mem_i, 
-	mux8_o,		 
-	pc_o,		
-	if_id_o 	
->>>>>>> e614e4d3134b571587ffd2736dd196f906b2a947
 );
 
 input [4:0] if_idrt_i, if_idrs_i, id_ex_i; 
