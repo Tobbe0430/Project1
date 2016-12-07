@@ -22,6 +22,22 @@ assign mux8_o = temp_mux8_o;
 always @ (*)
 begin
 	case (op_i)
+		//Flush - Changes the memwrite and regwrite to 0 to not change anything.
+		6'b111111:	begin
+					temp_mux1_o		 = 1'b0;	//We are not going to branch
+					temp_mux2_o		 = 1'b0;	//We are not going to jump
+					//EX:
+					temp_mux8_o[0]   = 1'b0;	//ALUSrc (If we are going to use Immidiate or register in the ALU) 
+					temp_mux8_o[2:1] = 2'b11;	//ALUOp (What kind of operation the ALU should do)
+					temp_mux8_o[3]   = 1'b1;	//RegDst (If we are going to store our result in rt or rd)
+					//M:
+					temp_mux8_o[4]   = 1'b0;	//Memread (If we are going to read from memory or not)
+					temp_mux8_o[5]   = 1'b0;	//Memwrite (If are going to write into memory or not)
+					//WB:
+					temp_mux8_o[6]   = 1'b0;	//Regwrite (If we are going to write into the register or not)
+					temp_mux8_o[7]   = 1'b0;	//Memreg (If we should save the value from Alu or the memory in the register)			
+					end			
+
 		//R-Type
 		6'b000000:	begin
 					temp_mux1_o		 = 1'b0;	//We are not going to branch
