@@ -7,23 +7,25 @@ module Data_Memory
 	memdata_o				//32 bits, rt data read from memory
 );
 
-input 			memread_i, memwrite_i, 
-input	[31:0]	writeaddr_i, writedata_i;
+input 			memread_i, memwrite_i;
+input	[31:0]	memaddr_i, writedata_i;
 output	[31:0]	memdata_o;
 
 reg		[31:0]	memory		[0:31];
+reg		[31:0]  temp_memdata_o;
 
-assign memdata_o = memory[memaddr_i];
+assign  memdata_o = temp_memdata_o; //Unsure about this one
+//assign memdata_o = memory[memaddr_i];
 
 always@(*) 
 if(memwrite_i)
 begin	
-	memory[writeaddr_i] <=  writedata_i;
+	memory[memaddr_i] <=  writedata_i;
 end
 always@(*)
 if(memread_i)
 begin
-	memdata_o <= memory[memaddr_i];
+	temp_memdata_o <= memory[memaddr_i];
 end
 
 endmodule 
