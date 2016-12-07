@@ -48,8 +48,8 @@ assign rd_o = inst[15:11];
 always@(posedge clk_i) begin
     if(flush_i)
 		begin	
-		inst_addr = 0;
-		inst =		0;
+		inst_addr = 32'b11111100000000000000000000000000;
+		inst =		32'b11111100000000000000000000000000;
 		end
 	else if(hd_i)
 		begin
