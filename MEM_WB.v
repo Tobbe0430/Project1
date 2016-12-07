@@ -21,6 +21,10 @@ output			wb1_o, wb2_o, wb3_o;
 output	[31:0]	memdata_o, aluresult_o;
 output	[4:0]	writeaddr1_o, writeaddr2_o;
 
+reg 	[1:0] wb;
+reg 	[31:0] memdata, aluresult;
+reg		[4:0] writeaddr;
+
 assign wb1_o = wb[0];
 assign wb2_o = wb[0];
 assign wb3_o = wb[1];
@@ -29,9 +33,7 @@ assign aluresult_o = aluresult;
 assign writeaddr1_o = writeaddr;
 assign writeaddr2_o = writeaddr;
 
-reg 	[1:0] wb;
-reg 	[31:0] memdata, aluresult;
-reg		[4:0] writeaddr;
+
 
 always@(posedge clk_i) begin
         wb <= wb_i;

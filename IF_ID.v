@@ -29,6 +29,9 @@ output	[31:0]	inst_addr1_o,inst_addr2_o;
 output	[4:0]	rs1_o,rt1_o, rs2_o, rt2_o, rd_o;
 output	[15:0]	sign16_o;
 
+reg [31:0] inst_addr;
+reg [31:0] inst;
+
 assign mux2_o = inst[25:0];
 assign op_o = inst[5:0];
 assign inst_addr1_o = inst_addr;
@@ -42,8 +45,7 @@ assign rt2_o = inst[20:16];
 assign sign16_o = inst[15:0];
 assign rd_o = inst[15:11];
 
-reg [31:0] inst_addr;
-reg [31:0] inst;
+
 
 WHAT ABOUT FLUSH THOUGH??????
 

@@ -8,9 +8,11 @@ module Flush
 input	jump_i, branch_i;
 output	flush_o;
 
+reg flush;
+
 assign flush_o = flush;
 
-reg flush;
+
 
 always @ (*)
 begin
