@@ -17,13 +17,14 @@ reg [7:0]	temp_mux8_o;
 
 assign mux1_o = temp_mux1_o;
 assign mux2_o = temp_mux2_o;
-assign mux8_o = temp_max8_o;
+assign mux8_o = temp_mux8_o;
 
 always @ (*)
 begin
 	case (op_i)
 		//R-Type
-		6'b000000:	temp_mux1_o		 = 1'b0;	//We are not going to branch
+		6'b000000:	begin
+					temp_mux1_o		 = 1'b0;	//We are not going to branch
 					temp_mux2_o		 = 1'b0;	//We are not going to jump
 					//EX:
 					temp_mux8_o[0]   = 1'b0;	//ALUSrc (If we are going to use Immidiate or register in the ALU) 
@@ -35,9 +36,10 @@ begin
 					//WB:
 					temp_mux8_o[6]   = 1'b1;	//Regwrite (If we are going to write into the register or not)
 					temp_mux8_o[7]   = 1'b0;	//Memreg (If we should save the value from Alu or the memory in the register)			
-					
+					end			
 		//Addi
-		6'b001000:	temp_mux1_o		 = 1'b0;	//We are not going to branch
+		6'b001000:	begin
+					temp_mux1_o		 = 1'b0;	//We are not going to branch
 					temp_mux2_o		 = 1'b0;	//We are not going to jump
 					//EX:
 					temp_mux8_o[0]   = 1'b1;	//ALUSrc 	(If we are going to use Immidiate or register in the ALU) 
@@ -49,9 +51,10 @@ begin
 					//WB:
 					temp_mux8_o[6]   = 1'b1;	//Regwrite 	(If we are going to write into the register or not)
 					temp_mux8_o[7]   = 1'b0;	//Memreg	(If we should save the value from Alu or the memory in the register)			
-								
+					end			
 		//Lw
-		6'b100011:	temp_mux1_o		 = 1'b0;	//We are not going to branch
+		6'b100011:	begin
+					temp_mux1_o		 = 1'b0;	//We are not going to branch
 					temp_mux2_o		 = 1'b0;	//We are not going to jump
 					//EX:
 					temp_mux8_o[0]   = 1'b1;	//ALUSrc 	(If we are going to use Immidiate or register in the ALU) 
@@ -63,9 +66,10 @@ begin
 					//WB:
 					temp_mux8_o[6]   = 1'b1;	//Regwrite	(If we are going to write into the register or not)
 					temp_mux8_o[7]   = 1'b1;	//Memreg	(If we should save the value from Alu or the memory in the register)			
-					
+					end
 		//Sw
-		6'b101011:	temp_mux1_o		 = 1'b0;	//We are not going to branch
+		6'b101011:	begin
+					temp_mux1_o		 = 1'b0;	//We are not going to branch
 					temp_mux2_o		 = 1'b0;	//We are not going to jump
 					//EX:
 					temp_mux8_o[0]   = 1'b1;	//ALUSrc 	(If we are going to use Immidiate or register in the ALU) 
@@ -77,9 +81,10 @@ begin
 					//WB:
 					temp_mux8_o[6]   = 1'b0;	//Regwrite	(If we are going to write into the register or not)
 					//temp_mux8_o[7]   = 1'b1;	//Memreg	Don't care(If we should save the value from Alu or the memory in the register)			
-					
+					end
 		//Branch
-		6'b000100:	temp_mux1_o		 = 1'b1; 	//If we are going to branch, send 1 to mux1
+		6'b000100:	begin
+					temp_mux1_o		 = 1'b1; 	//If we are going to branch, send 1 to mux1
 					temp_mux2_o		 = 1'b0;	//We are not going to jump
 					//EX:
 					temp_mux8_o[0]   = 1'b0;	//ALUSrc 	(If we are going to use Immidiate or register in the ALU) 
@@ -91,9 +96,10 @@ begin
 					//WB:
 					temp_mux8_o[6]   = 1'b0;	//Regwrite	(If we are going to write into the register or not)
 					//temp_mux8_o[7]   = 1'b1;	//Memreg	Don't care (If we should save the value from Alu or the memory in the register)			
-					
+					end
 		//Jump
-		6'b000010:	temp_mux1_o		 = 1'b0; 	//We are not going to branch
+		6'b000010:	begin
+					temp_mux1_o		 = 1'b0; 	//We are not going to branch
 					temp_mux2_o		 = 1'b1;	//If we are going to jump, send 1 to mux2
 					//EX:
 					//temp_mux8_o[0]   = 1'b0;	//ALUSrc 	Don't care (If we are going to use Immidiate or register in the ALU) 
@@ -105,7 +111,8 @@ begin
 					//WB:
 					temp_mux8_o[6]   = 1'b0;	//Regwrite	(If we are going to write into the register or not)
 					//temp_mux8_o[7]   = 1'b1;	//Memreg	Don't care (If we should save the value from Alu or the memory in the register)		
-		default:	
+					end
+		default: 	
 	endcase
 				
 		//TODO Add more here! 
