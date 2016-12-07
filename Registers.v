@@ -21,8 +21,8 @@ output  [31:0]      rsdata1_o, rsdata2_o;
 output  [31:0]      rtdata1_o, rtdata2_o;
 
 // Register File
-reg     [31:0]      register1        [0:31];
-reg     [31:0]      register2        [0:31];
+reg     [31:0]      register        [0:31];
+
 
 // Read Data      
 assign  rsdata_o = register[rsaddr_i];
