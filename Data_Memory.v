@@ -12,13 +12,13 @@ input	[31:0]	writeaddr_i, writedata_i;
 
 output	[31:0]	memdata_o;
 
-reg		[31:0]	data_memory		[0:255];
+reg		[31:0]	memory		[0:31];
 
-assign memdata_o = data_memory[memaddr_i];
+assign memdata_o = memory[memaddr_i];
 
 always@(posedge clk_i) begin
     if(memwrite_i)
-        data_memory[writeaddr_i] <=  memdata_i;
+        memory[writeaddr_i] <=  memdata_i;
 end
    
 endmodule 
