@@ -26,16 +26,16 @@ begin
 	if((id_ex_memread_i)&((if_idrs_i==id_ex_i)|(if_idrt_i==id_ex_i)))
 		//stall
 		begin
-		temp_if_id_o =	1'b0;
-		temp_pc_o =		1'b0;
-		temp_mux8_o =	1'b1;
+		temp_if_id_o =	1'b1;
+		temp_pc_o =		1'b1;
+		temp_mux8_o =	1'b0;
 		end
 	else
 		//write
 		begin
-		temp_if_id_o =	1'b1;
-		temp_pc_o =		1'b1;
-		temp_mux8_o =	1'b0;
+		temp_if_id_o =	1'b0;
+		temp_pc_o =		1'b0;
+		temp_mux8_o =	1'b1;
 		end
 end
 		

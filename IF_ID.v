@@ -51,7 +51,7 @@ always@(posedge clk_i) begin
 		inst_addr = 32'b11111100000000000000000000000000;
 		inst =		32'b11111100000000000000000000000000;
 		end
-	else if(hd_i)
+	else if(hd_i == 0)
 		begin
         inst_addr <= inst_addr_i;
 		inst <= inst_i;
