@@ -22,7 +22,7 @@ reg     [31:0]      pc1_o;
 reg     [31:0]      pc2_o;
 
 always@(posedge clk_i or negedge rst_i) begin
-    if(~rst_i) begin
+    if((~rst_i)&(hd_i==0)) begin
         pc1_o <= 32'b0;
 		pc2_o <= 32'b0;
     end
