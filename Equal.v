@@ -9,7 +9,7 @@ input	[31:0]	rsdata_i;
 input	[31:0]	rtdata_i;
 output 			zero_o
 
-assign zero_o = (rsdata_i == rtdata_i)? 1:
+assign zero_o = (rsdata_i == rtdata_i)? (1'b1):
 				0;
 				
 endmodule 
