@@ -1,12 +1,12 @@
 module Control
 (
-	Op_i,
+	op_i,
 	mux1_o,
 	mux2_o,
 	mux8_o
 );
 
-input 	[5:0] 	Op_i;
+input 	[5:0] 	op_i;
 output			mux1_o;
 output			mux2_o;
 output	[7:0]	mux8_o;
@@ -21,7 +21,7 @@ assign mux8_o = temp_max8_o;
 
 always @ (*)
 begin
-		case (Op_i)
+		case (op_i)
 			//R-Type
 			6'b000000:	temp_mux1_o		 = 1'b0;	//We are not going to branch
 						temp_mux2_o		 = 1'b0;	//We are not going to jump

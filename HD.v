@@ -1,11 +1,11 @@
 module HD
 (
-	.if_id_i,
-	.id_ex_i,
-	.id_ex_mem_i, 
-	.mux8_o,		 
-	.pc_o,		
-	.if_id_o 	
+	if_id_i,
+	id_ex_i,
+	id_ex_mem_i, 
+	mux8_o,		 
+	pc_o,		
+	if_id_o 	
 );
 
 input [?:?] if_id_i;
