@@ -39,11 +39,11 @@ output	[1:0]	ex2_o;
 output	[31:0]	rsdata_o, rtdata_o, imm_o;
 output	[4:0]	rsaddr_o, rtaddr1_o, rtaddr2_o, rtaddr3_o, rdaddr_o;
 
-reg [1:0]	wb;
-reg [1:0]	mem;
-reg [3:0]	ex;
-reg [31:0] 	inst_addr, rsdata, rtdata, imm;
-reg [4:0]	rsaddr, rtaddr, rdaddr;
+reg 	[1:0]	wb;
+reg 	[1:0]	mem;
+reg 	[3:0]	ex;
+reg 	[31:0] 	inst_addr, rsdata, rtdata, imm;
+reg 	[4:0]	rsaddr, rtaddr, rdaddr;
 
 assign wb_o = wb;
 assign mem_o = mem;
@@ -72,7 +72,5 @@ always@(posedge clk_i) begin
 		rtaddr <= rtaddr_i;
 		rdaddr <= rdaddr_i;
 end
-
-endmodule 
 
 endmodule
