@@ -69,7 +69,7 @@ IF_ID IF_ID(
 	.inst_addr_i 	(Add_PC.data2_o),			//32 bits, instruction address
 	.inst_i		 	(Instruction_Memory.inst_o),//32 bits, the whole instruction
 	.hd_i		 	(HD.if_id_o),				//1  bit, hazard or no hazard? that is the question.
-	.flush_i     	(Flush.flush_o)			 	//1  bit, flush or not
+	.flush_i     	(Flush.flush_o),			//1  bit, flush or not
 	.mux2_o 		(MUX2.data2_i), 			//26 bits, instruction[25:0] (needs to shift left)
 	.hdrt_o			(HD.if_idrt_i),				//5 bits, to hazard detection
 	.hdrt_o			(HD.if_idrs_i),				//5 bits, to hazard detection
@@ -156,7 +156,7 @@ ID_EX ID_EX(
 	.rsdata_o 	 	(MUX6.data1_i),				//32 bits, rs data
 	.rtdata_o	 	(MUX7.data1_i),				//32 bits, rt data
 	.imm1_o		 	(MUX4.data2_i),				//32 bits, imm. output
-	.funct_o	 	(ALU_Control.funct_i)		//6  bits, 6 LSB of imm. output
+	.funct_o	 	(ALU_Control.funct_i),		//6  bits, 6 LSB of imm. output
 	.rsaddr_o	 	(FU.rsaddr_i),				//5  bits, rs address
 	.rtaddr1_o	 	(FU.rtaddr_i),				//5  bits, rt address
 	.rtaddr2_o	 	(MUX3.data1_i),				//5  bits, rt address
@@ -253,7 +253,7 @@ MEM_WB MEM_WB(
 	.wb_i		 	(EX_MEM.wb2_o),				//2  bits, control input
 	.memdata_i   	(Data_Memory.memdata_o),	//32 bits, rt data read from memory
 	.aluresult_i 	(EX_MEM.result2_o),			//32 bits, ALU result
-	.writeaddr_i	(EX_MEM.writeaddr2_o),		//1 b
+	.writeaddr_i	(EX_MEM.writeaddr2_o),		//5  bits, write address
 	.wb1_o		 	(Registers.regwrite_i),		//1  bit, control input (regwrite)
 	.wb2_o		 	(FU.wb2_i),					//1  bit, control input (regwrite)
 	.wb3_o		 	(MUX5.memtoreg_i),			//1  bit, control input
