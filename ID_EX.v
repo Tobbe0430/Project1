@@ -10,6 +10,7 @@ module ID_EX
 	imm_i,
 	rsaddr_i,
 	rtaddr_i,
+	rdaddr_i,
 	wb_o,
 	mem1_o,
 	mem2_o,
