@@ -17,6 +17,7 @@ module MEM_WB
 input 			clk_i;
 input	[1:0]	wb_i;
 input	[31:0]	memdata_i,aluresult_i;
+input 	[4:0] writeaddr_i;
 output			wb1_o, wb2_o, wb3_o;
 output	[31:0]	memdata_o, aluresult_o;
 output	[4:0]	writeaddr1_o, writeaddr2_o;
