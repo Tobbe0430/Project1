@@ -2,7 +2,7 @@ module Data_Memory
 (
 	memread_i,				//1  bit, control input
 	memwrite_i,				//1  bit, control input
-	memaddr_i,			//32 bits, the address.
+	memaddr_i,				//32 bits, the address.
 	writedata_i,			//32 bits, rt data to be written into memory
 	memdata_o				//32 bits, rt data read from memory
 );
