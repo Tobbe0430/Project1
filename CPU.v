@@ -71,7 +71,8 @@ IF_ID IF_ID(
 	.hd_i		 	(HD.if_id_o),				//1  bit, hazard or no hazard? that is the question.
 	.flush_i     	(Flush.flush_o)			 	//1  bit, flush or not
 	.mux2_o 		(MUX2.data2_i), 			//26 bits, instruction[25:0] (needs to shift left)
-	.hd_o			(HD.if_id_i),				//5 bits, to hazard detection
+	.hdrt_o			(HD.if_idrt_i),				//5 bits, to hazard detection
+	.hdrt_o			(HD.if_idrs_i),				//5 bits, to hazard detection
 	.op_o	 		(Control.op_i),				//6  bits, op to control_i
 	.inst_addr1_o	(Add_Branch.data2_i),		//32 bits, instruction address
 	.inst_addr2_o	(ID_EX.inst_addr_i),		//32 bits, instruction address
@@ -97,9 +98,10 @@ Registers Registers(
 );
 
 HD HD(
-	.if_id_i 	 	(IF_ID.hd_o),				//?? bits, something
+	.if_idrs_i 	 	(IF_ID.hdrs_o),				//5 bits, rsaddress
+	.if_idrt_i 	 	(IF_ID.hdrt_o),				//5 bits, rtaddress
 	.id_ex_i	 	(ID_EX.rtaddr3_o),			//5  bits, rd address
-	.id_ex_mem_i 	(ID_EX.mem2_o),				//2  bits, mem control signal
+	.id_ex_memread_i	(ID_EX.mem2_o),				//1  bits, mem control signal
 	.mux8_o		 	(MUX8.hd_i),				//1  bit, hazard or no hazard
 	.pc_o		 	(PC.hd_i),					//1  bit, hazard or no hazard
 	.if_id_o 	 	(IF_ID.hd_i)				//1  bit, hazard or no hazard
@@ -146,8 +148,8 @@ ID_EX ID_EX(
 	.rtaddr_i 	 	(IF_ID.rt2_o),				//5  bits, rt address
 	.rdaddr_i 	 	(IF_ID.rd_o),				//5  bits, rd address
 	.wb_o		 	(EX_MEM.wb_i),				//2  bits, control input
-	.mem1_o		 	(EX_MEM.mem_i),				//2  bits, control input
-	.mem2_o		 	(HD.id_ex_mem_i),			//2  bits, control input
+	.mem1_o		 	(EX_MEM.mem_i),				//1  bits, control input
+	.mem2_o		 	(HD.id_ex_memread_i),		//1  bits, control input
 	.ex1_o		 	(MUX4.alusrc_i),			//1  bit, control input
 	.ex2_o		 	(ALU_Control.aluop_i),		//2  bit, control input	
 	.ex3_o		 	(MUX3.regdst_i),			//1  bit, control input

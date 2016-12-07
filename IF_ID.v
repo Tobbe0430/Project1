@@ -22,19 +22,20 @@ input 			clk_i;
 input	[31:0]	inst_addr_i,inst_i;
 input			hd_i,flush_i;
 output	[25:0]	mux2_o;
-output	[4:0]	hd_o;
+output	[4:0]	hdrt_o, hdrs_o;
 output	[5:0]	op_o;
 output	[31:0]	inst_addr1_o,inst_addr2_o;
 output	[4:0]	rs1_o,rt1_o, rs2_o, rt2_o, rd_o;
 output	[15:0]	sign16_o;
 
 assign mux2_o = inst[25:0];
-assign hd_o = ??
 assign op_o = inst[5:0];
 assign inst_addr1_o = inst_addr;
 assign inst_addr2_o = inst_addr;
 assign rs1_o = inst[25:21];
 assign rs2_o = inst[25:21];
+assign hdrs_o = inst[25:21];
+assign hdrt_o = inst[20:16];
 assign rt1_o = inst[20:16];
 assign rt2_o = inst[20:16];
 assign sign16_o = inst[15:0];
