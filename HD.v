@@ -16,6 +16,7 @@ output 		pc_o;
 output		if_id_o;
 
 reg		temp_mux8_o, temp_pc_o, temp_if_id_o;
+
 assign	pc_o = temp_pc_o;
 assign	mux8_o = temp_mux8_o;
 assign	if_id_o = temp_if_id_o;

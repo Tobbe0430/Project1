@@ -9,7 +9,7 @@ module MUX6
 
 input	[31:0]	data1_i, data2_i, data3_i;
 input	[1:0]	fu_i;
-output	[32:0]	data_o;
+output	[31:0]	data_o;
 
 reg		temp_data_o;
 assign	data_o = temp_data_o;

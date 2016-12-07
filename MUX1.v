@@ -1,11 +1,11 @@
 module MUX1
 (
-	and1_i;
-	and2_i;
-	data1_i;
-	data2_i;
-	data_o;
-	andresult_o;
+	and1_i,
+	and2_i,
+	data1_i,
+	data2_i,
+	data_o,
+	andresult_o
 );
 
 input			and1_i, and2_i;
