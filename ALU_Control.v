@@ -2,7 +2,7 @@ module ALU_Control
 (
 	funct_i,
 	ALUOp_i,
-	ALUCtrl_o,
+	ALUCtrl_o
 );
 
 input 	[5:0] 	funct_i;
