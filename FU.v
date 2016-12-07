@@ -15,10 +15,12 @@ input	[1:0]	wb1_i;
 input			wb2_i;
 output	[1:0]	mux6_o, mux7_o;
 
+reg [1:0] mux6ctrl, mux7ctrl;
+
 assign mux6_o = mux6ctrl;
 assign mux7_o = mux7ctrl;
 
-reg [1:0] mux6ctrl, mux7ctrl;
+
 
 always @ (*)
 begin
