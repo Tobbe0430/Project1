@@ -27,15 +27,19 @@ assign ex_o = temp_ex_o;
 always @ (*)
 begin
 		case (hd_i)			
-			1'b0:	temp_wb_o	= data1_i[7:6];
+			1'b0:	begin
+					temp_wb_o	= data1_i[7:6];
 					temp_mem_o	= data1_i[5:4];
 					temp_ex_o	= data1_i[3:0];
+					end
 					
-			1'b1:	temp_wb_o	= data2_i[7:6];
+			1'b1:	begin
+					temp_wb_o	= data2_i[7:6];
 					temp_mem_o	= data2_i[5:4];
 					temp_ex_o	= data2_i[3:0];
-			default:
-endcase
+					end
+			default: $display("Error in MUX8");
+		endcase
 end
 
 endmodule

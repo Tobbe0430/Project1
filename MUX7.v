@@ -20,13 +20,19 @@ assign	data2_o = temp_data2_o;
 always @ (*)
 begin
 		case(fu_i)
-			2'b00:	temp_data1_o = data1_i;
+			2'b00:	begin
+					temp_data1_o = data1_i;
 					temp_data2_o = data1_i;
-			2'b01:	temp_data1_o = data2_i;
+					end
+			2'b01:	begin
+					temp_data1_o = data2_i;
 					temp_data2_o = data2_i;
-			2'b10:	temp_data1_o = data3_i;
+					end
+			2'b10:	begin
+					temp_data1_o = data3_i;
 					temp_data2_o = data3_i;
-			default:	//nothing
+					end
+			default: $display("Error in MUX 7");
 		endcase
 end
 
