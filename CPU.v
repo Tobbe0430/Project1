@@ -71,7 +71,7 @@ IF_ID IF_ID(
 	.hd_i		 	(HD.if_id_o),				//1  bit, hazard or no hazard? that is the question.
 	.flush_i     	(Flush.flush_o)			 	//1  bit, flush or not
 	.mux2_o 		(MUX2.data2_i), 			//26 bits, instruction[25:0] (needs to shift left)
-	.hd_o			(HD.if_id_i),				//?? bits, to hazard detection
+	.hd_o			(HD.if_id_i),				//5 bits, to hazard detection
 	.op_o	 		(Control.op_i),				//6  bits, op to control_i
 	.inst_addr1_o	(Add_Branch.data2_i),		//32 bits, instruction address
 	.inst_addr2_o	(ID_EX.inst_addr_i),		//32 bits, instruction address

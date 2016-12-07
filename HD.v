@@ -8,12 +8,13 @@ module HD
 	.if_id_o 	
 );
 
-input [?:?] if_id_i;
-input [4:0] id_ex_i;
+input [4:0] if_id_i, id_ex_i; 
 input [2:0] id_ex_mem_i;
 
 output 		mux8_o;
 output 		pc_o;
 output		if_id_o;
+
+
 
 endmodule

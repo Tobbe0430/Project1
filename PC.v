@@ -18,8 +18,8 @@ input   [31:0]  	pc_i;
 output  [31:0]  	pc1_o, pc2_o;
 
 // Wires & Registers NOT WRITTEN BY US
-reg     [31:0]      pc_o;
-
+reg     [31:0]      pc1_o;
+reg     [31:0]      pc2_o;
 
 always@(posedge clk_i or negedge rst_i) begin
     if(~rst_i) begin
