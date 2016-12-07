@@ -26,9 +26,8 @@ begin
 					temp_data2_o = data2_i;
 			2'b10:	temp_data1_o = data3_i;
 					temp_data2_o = data3_i;
-			default:
-			
-endcase
+			default:	//nothing
+		endcase
 end
 
 endmodule

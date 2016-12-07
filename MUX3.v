@@ -1,6 +1,6 @@
 module MUX3
 (
-	regdist_i,
+	regdst_i,
 	data1_i,
 	data2_i,
 	data_o
