@@ -26,7 +26,6 @@ module ID_EX
 	rtaddr2_o,
 	rtaddr3_o,
 	rdaddr_o
-	//hi there
 );
 
 input 			clk_i;
@@ -59,6 +58,7 @@ assign ex3_o = ex[3];
 assign rsdata_o = rsdata;
 assign rtdata_o = rtdata;
 assign imm_o = imm;
+assign funct_o = imm[5:0];
 assign rsaddr_o = rsaddr;
 assign rtaddr1_o = rtaddr;
 assign rtaddr2_o = rtaddr;
