@@ -23,9 +23,9 @@ assign flush_o = temp_mux2_o;
 assign mux8_o = temp_mux8_o;
 
 
-always @ (*)
+always @ (op_i)
 begin
-	case (op_i)
+	case (op_i) 
 		//Flush - Changes the memwrite and regwrite to 0 to not change anything.
 		6'b111111:	begin
 					temp_mux1_o		 = 1'b0;	//We are not going to branch
@@ -55,7 +55,7 @@ begin
 					temp_mux8_o[5]   = 1'b0;	//Memwrite (If are going to write into memory or not)
 					//WB:
 					temp_mux8_o[6]   = 1'b1;	//Regwrite (If we are going to write into the register or not)
-					temp_mux8_o[7]   = 1'b0;	//Memreg (If we should save the value from Alu or the memory in the register)			
+					temp_mux8_o[7]   = 1'b1;	//Memreg (If we should save the value from Alu or the memory in the register)			
 					end			
 		//Addi
 		6'b001000:	begin
@@ -70,7 +70,7 @@ begin
 					temp_mux8_o[5]   = 1'b0;	//Memwrite 	(If are going to write into memory or not)
 					//WB:
 					temp_mux8_o[6]   = 1'b1;	//Regwrite 	(If we are going to write into the register or not)
-					temp_mux8_o[7]   = 1'b0;	//Memreg	(If we should save the value from Alu or the memory in the register)			
+					temp_mux8_o[7]   = 1'b1;	//Memreg	(If we should save the value from Alu or the memory in the register)			
 					end			
 		//Lw
 		6'b100011:	begin
@@ -85,7 +85,7 @@ begin
 					temp_mux8_o[5]   = 1'b0;	//Memwrite	(If are going to write into memory or not)
 					//WB:
 					temp_mux8_o[6]   = 1'b1;	//Regwrite	(If we are going to write into the register or not)
-					temp_mux8_o[7]   = 1'b1;	//Memreg	(If we should save the value from Alu or the memory in the register)			
+					temp_mux8_o[7]   = 1'b0;	//Memreg	(If we should save the value from Alu or the memory in the register)			
 					end
 		//Sw
 		6'b101011:	begin
@@ -147,7 +147,7 @@ begin
 		//mux8_0[5]   = Memwrite (If are going to write into memory or not)
 		//WB:
 		//mux8_0[6]   = Regwrite (If we are going to write into the register or not)
-		//mux8_0[7]   = Memreg (If we should save the value from Alu or the memory in the register)
+		//mux8_0[7]   = Memreg (1 = value from Alu or 0 = memory in the register)
 		
 		
 end
