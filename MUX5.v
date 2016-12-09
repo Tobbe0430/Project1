@@ -8,9 +8,9 @@ module MUX5
 	data3_o
 );
 
-input [4:0] data1_i, data2_i;
+input [31:0] data1_i, data2_i;
 input 	    memtoreg_i;
-output [4:0] data1_o, data2_o, data3_o;
+output [31:0] data1_o, data2_o, data3_o;
 
 assign data1_o = (memtoreg_i == 0)? (data1_i):
 				data2_i;
