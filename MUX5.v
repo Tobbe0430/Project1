@@ -2,15 +2,21 @@ module MUX5
 (
 	data1_i,
 	data2_i,
-	select_i,
-	data_o
+	memtoreg_i,
+	data1_o,
+	data2_o,
+	data3_o
 );
 
 input [4:0] data1_i, data2_i;
-input 	    select_i;
-output [4:0] data_o;
+input 	    memtoreg_i;
+output [4:0] data1_o, data2_o, data3_o;
 
-assign data_o = (select_i == 0)? (data1_i):
+assign data1_o = (memtoreg_i == 0)? (data1_i):
+				data2_i;
+assign data2_o = (memtoreg_i == 0)? (data1_i):
+				data2_i;
+assign data3_o = (memtoreg_i == 0)? (data1_i):
 				data2_i;
 
 

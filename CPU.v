@@ -39,7 +39,7 @@ Control Control(
 	.mux1_o			(MUX1.and1_i), 				//1 bit, control input
 	.mux2_o		 	(MUX2.control_i),			//1 bit, control input
 	.flush_o		(Flush.jump_i),				//1 bit, flush or not
-	.mux8_o		 	(MUX8.control_i)  			//8 bits, control input
+	.mux8_o		 	(MUX8.data1_i)  			//8 bits, control input
 );
 
 Adder Add_PC(
@@ -80,7 +80,7 @@ IF_ID IF_ID(
 	.rt1_o			(Registers.rtaddr_i),		//5  bits, rt address
 	.rs2_o			(ID_EX.rsaddr_i),			//5  bits, rs address
 	.rt2_o		 	(ID_EX.rtaddr_i), 			//5  bits, rt address
-	.sign16_o		(Sign_Extend.data_i),		//16 bits, immediate
+	.sign16_o		(Sign_Extend.if_id_i),		//16 bits, immediate
 	.rd_o			(ID_EX.rdaddr_i)			//5  bits, rd address
 );
 
@@ -108,7 +108,7 @@ HD HD(
 );
 
 Add_Branch Add_Branch(
-	.data1_i	 	(Sign_Extend.data_o),		//32 bits, need shift left 2
+	.data1_i	 	(Sign_Extend.b_add_o),		//32 bits, need shift left 2
 	.data2_i	 	(IF_ID.inst_addr1_o),		//32 bits, inst addr
 	.data_o		 	(MUX1.data1_i)				//32 bits, branch address
 );
@@ -174,7 +174,7 @@ MUX6 MUX6(
 
 MUX7 MUX7(
 	.data1_i	 	(ID_EX.rtdata_o),			//32 bits, rt data
-	.data2_i	 	(MUX5.data2_o),				//32 bits, forwarded data
+	.data2_i	 	(MUX5.data3_o),				//32 bits, forwarded data
 	.data3_i	 	(EX_MEM.result3_o),			//32 bits, forwarded data
 	.fu_i		 	(FU.mux7_o),				//2  bit, FU input
 	.data1_o	 	(MUX4.data1_i),				//32 bits, for mux4 data1
@@ -268,7 +268,8 @@ MUX5 MUX5(
     .data2_i    	(MEM_WB.aluresult_o),		//32 bits, ALU result
     .memtoreg_i 	(MEM_WB.wb3_o),				//1  bit, control input
     .data1_o    	(MUX6.data2_i),				//32 bits, forwarded data to ID_EX/EX_MEM stage
-	.data2_o		(Registers.writedata_i)		//32 bits, write data
+	.data2_o		(Registers.writedata_i),	//32 bits, write data
+	.data3_o		(MUX7.data2_i)				//32 bits, forwarded data to ID_EX/EX_MEM stage
 );
 
 
