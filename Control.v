@@ -3,12 +3,14 @@ module Control
 	op_i,
 	mux1_o,
 	mux2_o,
+	flush_o,
 	mux8_o
 );
 
 input 	[5:0] 	op_i;
 output			mux1_o;
 output			mux2_o;
+output 			flush_o;
 output	[7:0]	mux8_o;
 
 reg 		temp_mux1_o;
@@ -16,8 +18,10 @@ reg 		temp_mux2_o;
 reg [7:0]	temp_mux8_o;
 
 assign mux1_o = temp_mux1_o;
-assign mux2_o = temp_mux2_o;
+assign mux2_o = temp_mux2_o; 
+assign flush_o = temp_mux2_o;
 assign mux8_o = temp_mux8_o;
+
 
 always @ (*)
 begin
