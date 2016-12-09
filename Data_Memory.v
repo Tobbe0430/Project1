@@ -11,7 +11,7 @@ input 			memread_i, memwrite_i;
 input	[31:0]	memaddr_i, writedata_i;
 output	[31:0]	memdata_o;
 
-reg		[31:0]	memory		[0:31];
+reg		[7:0]	memory		[0:31];
 reg		[31:0]  temp_memdata_o;
 
 assign  memdata_o = temp_memdata_o; //Unsure about this one
