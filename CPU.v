@@ -231,7 +231,11 @@ EX_MEM EX_MEM(
 	.wb2_o		 	(MEM_WB.wb_i),				//2  bits, control input
 	.mem1_o		 	(Data_Memory.memread_i),	//1  bit, control input
 	.mem2_o		 	(Data_Memory.memwrite_i),	//1  bit, control input
+<<<<<<< HEAD
 	.result1_o	 	(Data_Memory.memaddr_i),  	//32 bits, ALU result
+=======
+	.result1_o	 	(Data_Memory.memaddr_i),    //32 bits, ALU result
+>>>>>>> origin/master
 	.result2_o	 	(MEM_WB.aluresult_i),		//32 bits, ALU result
 	.result3_o	 	(MUX7.data3_i),				//32 bits, ALU result from previous stage
 	.result4_o   	(MUX6.data3_i),				//32 bits, ALU result from previous stage
