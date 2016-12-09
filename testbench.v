@@ -63,7 +63,7 @@ always@(posedge Clk) begin
     if(CPU.HD.mux8_o == 1)flush = flush + 1;  
 
     // print PC
-    $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc_o);
+    $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc1_o);
     
     // print Registers
     $fdisplay(outfile, "Registers");

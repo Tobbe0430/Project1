@@ -36,9 +36,9 @@ MUX2 MUX2(
 
 Control Control(
     .op_i        	(IF_ID.op_o), 				//6 bits, op code
-	.mux1_o			(MUX1.control_i), 			//1 bit, control input
+	.mux1_o			(MUX1.and1_i), 				//1 bit, control input
 	.mux2_o		 	(MUX2.control_i),			//1 bit, control input
-	.flush_o		(Flush.control_i),			//1 bit, flush or not
+	.flush_o		(Flush.jump_i),				//1 bit, flush or not
 	.mux8_o		 	(MUX8.control_i)  			//8 bits, control input
 );
 
