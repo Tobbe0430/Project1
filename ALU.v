@@ -3,16 +3,16 @@ module ALU
 	data1_i,
 	data2_i,
 	aluctrl_i,
-	data_o,
+	result_o,
 );
 
 input 	[31:0] 	data1_i, data2_i;
 input	[2:0] 	aluctrl_i;
-output 	[31:0] 	data_o;
+output 	[31:0] 	result_o;
 
 
 reg  	[31:0]	temp_data_o;
-assign 			data_o = temp_data_o;
+assign 			result_o = temp_data_o;
 
 
 always @ (*)

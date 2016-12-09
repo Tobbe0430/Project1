@@ -131,7 +131,7 @@ Equal Equal(
 
 Sign_Extend Sign_Extend(
     .if_id_i     	(IF_ID.sign16_o),			//16 bits, imm. input
-    .id_ex_o     	(ID_EX.sign_extd_i),		//32 bits, imm. output
+    .id_ex_o     	(ID_EX.imm_i),				//32 bits, imm. output
 	.b_add_o     	(Add_Branch.data1_i)		//32 bits, imm. output
 );
 
@@ -231,7 +231,7 @@ EX_MEM EX_MEM(
 	.wb2_o		 	(MEM_WB.wb_i),				//2  bits, control input
 	.mem1_o		 	(Data_Memory.memread_i),	//1  bit, control input
 	.mem2_o		 	(Data_Memory.memwrite_i),	//1  bit, control input
-	.result1_o	 	(Data_Memory.writeaddr_i),  //32 bits, ALU result
+	.result1_o	 	(Data_Memory.memaddr_i),    //32 bits, ALU result
 	.result2_o	 	(MEM_WB.aluresult_i),		//32 bits, ALU result
 	.result3_o	 	(MUX7.data3_i),				//32 bits, ALU result from previous stage
 	.result4_o   	(MUX6.data3_i),				//32 bits, ALU result from previous stage
