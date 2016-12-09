@@ -1,7 +1,7 @@
 module CPU
 (
     clk_i, 
-   // rst_i,
+  //  rst_i,
     start_i
 );
 
@@ -51,7 +51,7 @@ Adder Add_PC(
 
 PC PC(
     .clk_i       	(clk_i),
-    .rst_i       	(rst_i),
+   // .rst_i       	(rst_i),
     .start_i     	(start_i),
 	.hd_i		 	(HD.pc_o),					//1  bit
     .pc_i        	(MUX2.data_o), 				//32 bits, instr. addr. from MUX2
