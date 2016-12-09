@@ -36,7 +36,7 @@ input	[3:0]	ex_i;
 input	[31:0]	inst_addr_i, rsdata_i, rtdata_i, imm_i;
 input	[4:0]	rsaddr_i, rtaddr_i, rdaddr_i;
 output	[1:0]	wb_o;
-output	[2:0]	mem1_o, mem2_o;
+output	[1:0]	mem1_o, mem2_o;
 output			ex1_o, ex3_o;
 output	[1:0]	ex2_o;
 output	[31:0]	rsdata_o, rtdata_o, imm1_o;
