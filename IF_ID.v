@@ -32,7 +32,7 @@ output	[15:0]	sign16_o;
 reg [31:0] inst_addr, inst;
 
 assign mux2_o = inst[25:0];
-assign op_o = inst[5:0];
+assign op_o = inst[31:26];
 assign inst_addr1_o = inst_addr;
 assign inst_addr2_o = inst_addr;
 assign rs1_o = inst[25:21];
@@ -51,11 +51,12 @@ always@(posedge clk_i) begin
 		inst_addr = 32'b11111100000000000000000000000000;
 		inst =		32'b11111100000000000000000000000000;
 		end
-	else if(hd_i == 0)
+	else if(hd_i == 0) //Avkomenterade det här för att försöka fixa att vi inte klarar första snurren.
 		begin
         inst_addr <= inst_addr_i;
 		inst <= inst_i;
 		end
+	
 end
 
 endmodule 
