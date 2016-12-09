@@ -26,8 +26,8 @@ reg     [31:0]      register        [0:31];
 
 // Read Data      
 assign  rsdata1_o = register[rsaddr_i];
-assign  rtdata2_o = register[rtaddr_i];
-assign  rsdata1_o = register[rsaddr_i];
+assign  rtdata1_o = register[rtaddr_i];
+assign  rsdata2_o = register[rsaddr_i];
 assign  rtdata2_o = register[rtaddr_i];
 
 // Write Data   
