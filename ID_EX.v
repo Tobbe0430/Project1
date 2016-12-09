@@ -19,7 +19,7 @@ module ID_EX
 	ex3_o,
 	rsdata_o,
 	rtdata_o,
-	imm1_o,
+	imm_o,
 	funct_o,
 	rsaddr_o,
 	rtaddr1_o,
@@ -36,10 +36,11 @@ input	[3:0]	ex_i;
 input	[31:0]	inst_addr_i, rsdata_i, rtdata_i, imm_i;
 input	[4:0]	rsaddr_i, rtaddr_i, rdaddr_i;
 output	[1:0]	wb_o;
-output	[1:0]	mem1_o, mem2_o;
+output	[1:0]	mem1_o;
+output  		mem2_o;
 output			ex1_o, ex3_o;
 output	[1:0]	ex2_o;
-output	[31:0]	rsdata_o, rtdata_o, imm1_o;
+output	[31:0]	rsdata_o, rtdata_o, imm_o;
 output	[5:0]	funct_o;
 output	[4:0]	rsaddr_o, rtaddr1_o, rtaddr2_o, rtaddr3_o, rdaddr_o;
 
@@ -51,7 +52,7 @@ reg 	[4:0]	rsaddr, rtaddr, rdaddr;
 
 assign wb_o = wb;
 assign mem1_o = mem;
-assign mem2_o = mem;
+assign mem2_o = mem[0];
 assign ex1_o = ex[0];
 assign ex2_o = ex[2:1];
 assign ex3_o = ex[3];	

@@ -155,7 +155,7 @@ ID_EX ID_EX(
 	.ex3_o		 	(MUX3.regdst_i),			//1  bit, control input
 	.rsdata_o 	 	(MUX6.data1_i),				//32 bits, rs data
 	.rtdata_o	 	(MUX7.data1_i),				//32 bits, rt data
-	.imm1_o		 	(MUX4.data2_i),				//32 bits, imm. output
+	.imm_o		 	(MUX4.data2_i),				//32 bits, imm. output
 	.funct_o	 	(ALU_Control.funct_i),		//6  bits, 6 LSB of imm. output
 	.rsaddr_o	 	(FU.rsaddr_i),				//5  bits, rs address
 	.rtaddr1_o	 	(FU.rtaddr_i),				//5  bits, rt address

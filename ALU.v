@@ -3,7 +3,7 @@ module ALU
 	data1_i,
 	data2_i,
 	aluctrl_i,
-	result_o,
+	result_o
 );
 
 input 	[31:0] 	data1_i, data2_i;
