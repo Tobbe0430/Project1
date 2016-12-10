@@ -71,7 +71,7 @@ initial begin
 end
   
 always@(posedge Clk) begin
-	if(counter == 2) Start = 0;
+	//if(counter == 2) Start = 0;
     if(counter == 30)    // stop after 30 cycles
         $stop;
 
