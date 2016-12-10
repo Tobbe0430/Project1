@@ -32,8 +32,12 @@ assign  rtdata2_o = register[rtaddr_i];
 
 // Write Data   
 always@(posedge clk_i) begin
+	$display("We are inside the posedge of the clock");
     if(regwrite_i)
+		begin 
+		$display("We are inside, and we are also inside regwrite = 1");
         register[writeaddr_i] <= writedata_i;
+		end
 end
    
 endmodule 
