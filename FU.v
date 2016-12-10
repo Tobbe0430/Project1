@@ -26,7 +26,7 @@ always @ (*)
 begin
 	if ((writeaddr1_i != 5'b0) & (writeaddr1_i == rsaddr_i) & (wb1_i[1] == 1'b1))
 		mux6ctrl = 2'b10;
-	else if ((writeaddr1_i != 5'b0) & (writeaddr1_i == rsaddr_i) & (wb1_i[1] == 1'b1))
+	else if ((writeaddr1_i != 5'b0) & (writeaddr1_i == rtaddr_i) & (wb1_i[1] == 1'b1))
 		mux7ctrl = 2'b10;
 	else if ((writeaddr2_i != 5'b0) & (writeaddr2_i == rsaddr_i) & (wb2_i == 1'b1))
 		mux6ctrl = 2'b01;
