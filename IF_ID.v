@@ -46,7 +46,7 @@ assign rd_o = inst[15:11];
 
 
 always@(posedge clk_i) begin
-    if(flush_i | (hd_i == 1))	//Flyttade hit, kanske rätt, kanske inte.
+    if((flush_i == 1)|(hd_i == 1))	//Flyttade hit, kanske rätt, kanske inte.
 		begin	
 		inst_addr = 32'b11111100000000000000000000000000;
 		inst =		32'b11111100000000000000000000000000;
