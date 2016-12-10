@@ -46,11 +46,12 @@ assign rd_o = inst[15:11];
 
 
 always@(posedge clk_i) begin
-    if((flush_i == 1)|(hd_i == 1))	//Flyttade hit, kanske rätt, kanske inte.
+    if(hd_i == 1)	//Flyttade hit, kanske rätt, kanske inte.
 		begin	
 		//inst_addr = 32'b11111100000000000000000000000000;
-		//inst =		32'b11111100000000000000000000000000;
 		end
+	else if (flush_i == 1)
+		inst <=	32'b11111100000000000000000000000000;
 	else //if(hd_i == 0) //Avkomenterade det här för att försöka fixa att vi inte klarar första snurren.
 		begin
         inst_addr <= inst_addr_i;
