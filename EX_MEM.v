@@ -55,7 +55,7 @@ always@(posedge clk_i) begin
 	wb <= wb_i;
 	mem <= mem_i;
 	result <= result_i;
-	rtdata <= rtdata;
+	rtdata <= rtdata_i;
 	writeaddr <= writeaddr_i;
 end
 
