@@ -39,13 +39,10 @@ always@(posedge clk_i) begin
 			end
         else if (hd_i == 0)				//Everything as normal
 			begin
-			$display("Allt som normalt en el hd_o == 0");
 				pc <= pc_i;				//PC = next pc
 			end
 		else 							//hd_i == 1 
-			begin
-			$display("Estamos en el hd_o == 1");
-			//pc <= pc;					//Pc = previous pc
+			begin						//We don't wan't to update PC.	
 			end
 			
 end
