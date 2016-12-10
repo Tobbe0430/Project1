@@ -10,7 +10,7 @@ input               clk_i;
 //input               rst_i;
 input               start_i;
 
-wire 	[31:0] 	inst_addr, inst;
+//wire 	[31:0] 	inst_addr, inst;
 
 Flush Flush(
 	.jump_i		 	(Control.flush_o),			//1 bit, is jump control input = 1?

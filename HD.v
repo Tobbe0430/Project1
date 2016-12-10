@@ -28,14 +28,14 @@ begin
 		begin
 		temp_if_id_o =	1'b1;
 		temp_pc_o =		1'b1;
-		temp_mux8_o =	1'b0;
+		temp_mux8_o =	1'b1;	// Ändrade den här till 1 (utan för mycket tanke, hoppas att vi bara gjorde fel.)
 		end
 	else
 		//write
 		begin
 		temp_if_id_o =	1'b0;
 		temp_pc_o =		1'b0;
-		temp_mux8_o =	1'b1;
+		temp_mux8_o =	1'b0; // Ändrade den här till 0
 		end
 end
 		
