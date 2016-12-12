@@ -34,10 +34,6 @@ reg		[1:0]	mem;
 reg 	[31:0]	result, rtdata;
 reg		[4:0]	writeaddr;
 
-//FYI
-//eructar = to burp
-//eructo = one burp
-
 assign wb1_o = wb;
 assign wb2_o = wb;
 assign mem1_o = mem[0];
@@ -49,7 +45,6 @@ assign result4_o = result;
 assign rtdata_o = rtdata;
 assign writeaddr1_o = writeaddr;
 assign writeaddr2_o = writeaddr;
-
 
 always@(posedge clk_i) begin
 	wb <= wb_i;

@@ -1,7 +1,5 @@
 module Sign_Extend
 (
-	// data_i,
-	// data_o
 	if_id_i,
 	id_ex_o,
 	b_add_o
@@ -17,8 +15,5 @@ assign id_ex_o[15:0]  = if_id_i;
 
 assign b_add_o = id_ex_o;
 
-// [31:16] = (if_id_i[15] == 1'b1)? (16'b1111111111111111):
-					   // 16'b0000000000000000;
-// assign b_add_o[15:0]  = if_id_i;
 
 endmodule

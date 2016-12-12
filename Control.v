@@ -132,11 +132,10 @@ begin
 					temp_mux8_o[6]   = 1'b0;	//Regwrite	(If we are going to write into the register or not)
 					//temp_mux8_o[7]   = 1'b1;	//Memreg	Don't care (If we should save the value from Alu or the memory in the register)		
 					end
-		default: 	$display("Error in the fucking control");
+		default: 	$display("Error in the control");
 				
 	endcase
 				
-		//TODO Add more here! 
 		
 		//EX:
 		//mux8_0[0]   = ALUSrc (If we are going to use Immidiate or register in the ALU) 
