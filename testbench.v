@@ -30,7 +30,7 @@ initial begin
     end    
 	
 	//Initialize instruction memory the hard way:
-	CPU.Instruction_Memory.memory[0] = 32'b00000000000000000100000000100000; //PC= 0  add $t0,$0,$0   		
+	/*CPU.Instruction_Memory.memory[0] = 32'b00000000000000000100000000100000; //PC= 0  add $t0,$0,$0   		
 	CPU.Instruction_Memory.memory[1] = 32'b00100000000010010000000000001010; //PC= 4  addi $t1,$0,10
 	CPU.Instruction_Memory.memory[2] = 32'b10101101000000000000000000000000; //PC= 8  sw $0,0($t0)
 	CPU.Instruction_Memory.memory[3] = 32'b10101101000010010000000000000100; //PC=12  sw $t1,4($t0)
@@ -44,7 +44,7 @@ initial begin
 	CPU.Instruction_Memory.memory[11] = 32'b00000001010010010101000000100010; //PC=44  Jump: sub $t2,$t2,$t1
 	CPU.Instruction_Memory.memory[12] = 32'b00000001001010100101100000100100; //PC=48  and $t3,$t1,$t2
 	CPU.Instruction_Memory.memory[13] = 32'b00000001010010110110000000100101; //PC=52  or $t4,$t2,$t3
-
+*/
         
     // initialize Register File
     for(i=0; i<32; i=i+1) begin
@@ -71,13 +71,13 @@ initial begin
 end
   
 always@(posedge Clk) begin
-	//if(counter == 2) Start = 0;
+	//	if(counter == 2) Start = 0;
     if(counter == 30)    // stop after 30 cycles
         $stop;
 
     // put in your own signal to count stall and flush
     if(CPU.HD.mux8_o == 1 && CPU.Control.flush_o == 0 && CPU.Control.mux2_o == 0)stall = stall + 1;
-    if(CPU.HD.mux8_o == 1)flush = flush + 1;  
+    if(CPU.Flush.flush_o == 1)flush = flush + 1;  
 
     // print PC
     $fdisplay(outfile, "cycle = %d, Start = %d, Stall = %d, Flush = %d\nPC = %d", counter, Start, stall, flush, CPU.PC.pc1_o);
