@@ -14,8 +14,7 @@ output	[31:0]	memdata_o;
 reg		[7:0]	memory		[0:31];
 reg		[31:0]  temp_memdata_o;
 
-assign  memdata_o = temp_memdata_o; //Unsure about this one
-//assign memdata_o = memory[memaddr_i];
+assign  memdata_o = temp_memdata_o; 
 
 always@(*) 
 if(memwrite_i)
