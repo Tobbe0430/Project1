@@ -12,8 +12,7 @@ input			control_i;
 output	[31:0]	data_o;
 
 reg 	[31:0]	input2;
-//data1[31:28] tillsammans med data2_i<<2 ska vara data2_i
-// assign data2_i = data2_i<<2;
+
 assign data_o = (control_i == 0)? (data1_i):
 				input2;
 
