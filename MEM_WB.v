@@ -35,7 +35,6 @@ assign writeaddr1_o = writeaddr;
 assign writeaddr2_o = writeaddr;
 
 
-
 always@(posedge clk_i) begin
         wb <= wb_i;
 		memdata <= memdata_i;

@@ -28,23 +28,6 @@ initial begin
     for(i=0; i<32; i=i+1) begin
         CPU.Data_Memory.memory[i] = 8'b0;
     end    
-	
-	//Initialize instruction memory the hard way:
-	/*CPU.Instruction_Memory.memory[0] = 32'b00000000000000000100000000100000; //PC= 0  add $t0,$0,$0   		
-	CPU.Instruction_Memory.memory[1] = 32'b00100000000010010000000000001010; //PC= 4  addi $t1,$0,10
-	CPU.Instruction_Memory.memory[2] = 32'b10101101000000000000000000000000; //PC= 8  sw $0,0($t0)
-	CPU.Instruction_Memory.memory[3] = 32'b10101101000010010000000000000100; //PC=12  sw $t1,4($t0)
-	CPU.Instruction_Memory.memory[4] = 32'b10001101000011010000000000000100; //PC=16  lw $t5,4($t0)
-	CPU.Instruction_Memory.memory[5] = 32'b00000001101010010111100000100000; //PC=20  add $t7,$t5,$t1       (hazard!)  
-	CPU.Instruction_Memory.memory[6] = 32'b00100000000010100000000000001101; //PC=24  addi $t2,$0,13        (stall 1 cycle)
-	CPU.Instruction_Memory.memory[7] = 32'b00000001001010010101100000011000; //PC=28  mul $t3,$t1,$t1
-	CPU.Instruction_Memory.memory[8] = 32'b00001000000000000000000000001011; //PC=32  j Jump            
-	CPU.Instruction_Memory.memory[9] = 32'b00100001001010010000000000000001; //PC=36  addi $t1,$t1,1        (flush)
-	CPU.Instruction_Memory.memory[10] = 32'b00100001001010010000000000000001; //PC=40  addi $t1,$t1,1        
-	CPU.Instruction_Memory.memory[11] = 32'b00000001010010010101000000100010; //PC=44  Jump: sub $t2,$t2,$t1
-	CPU.Instruction_Memory.memory[12] = 32'b00000001001010100101100000100100; //PC=48  and $t3,$t1,$t2
-	CPU.Instruction_Memory.memory[13] = 32'b00000001010010110110000000100101; //PC=52  or $t4,$t2,$t3
-*/
         
     // initialize Register File
     for(i=0; i<32; i=i+1) begin
@@ -72,7 +55,7 @@ end
   
 always@(posedge Clk) begin
 	//	if(counter == 2) Start = 0;
-    if(counter == 30)    // stop after 30 cycles
+    if(counter == 80)    // stop after 30 cycles
         $stop;
 
     // put in your own signal to count stall and flush

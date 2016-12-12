@@ -20,7 +20,7 @@ output  [31:0]  	pc1_o, pc2_o;
 // Wires & Registers NOT WRITTEN BY US
 reg     [31:0]      pc;
 reg 				startdisable;//TOBBE
-
+	
 initial begin
 	startdisable = 0;
 end
