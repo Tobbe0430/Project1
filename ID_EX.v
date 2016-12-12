@@ -66,7 +66,7 @@ assign rtaddr3_o = rtaddr;
 assign rdaddr_o = rdaddr;
 
 
-always@(posedge clk_i) begin
+always@(negedge clk_i) begin
         wb <= wb_i;
 		mem <= mem_i;
 		ex <= ex_i;

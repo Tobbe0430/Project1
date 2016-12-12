@@ -27,7 +27,7 @@ end
 assign pc1_o = pc;
 assign pc2_o = pc;
 
-always@(posedge clk_i) begin
+always@(negedge clk_i) begin
     if((start_i) & (startdisable != 1'b1))
 		begin
 			pc <= 32'b0; 			

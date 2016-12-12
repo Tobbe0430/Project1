@@ -46,7 +46,7 @@ assign rtdata_o = rtdata;
 assign writeaddr1_o = writeaddr;
 assign writeaddr2_o = writeaddr;
 
-always@(posedge clk_i) begin
+always@(negedge clk_i) begin
 	wb <= wb_i;
 	mem <= mem_i;
 	result <= result_i;

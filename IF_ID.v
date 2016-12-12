@@ -45,7 +45,7 @@ assign sign16_o = inst[15:0];
 assign rd_o = inst[15:11];
 
 
-always@(posedge clk_i) begin
+always@(negedge clk_i) begin
     if(hd_i == 1)	
 		begin	
 		end
